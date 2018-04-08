@@ -5,9 +5,22 @@ from json2html import json2html
 from datetime import datetime
 from requests.auth import HTTPBasicAuth
 
-cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
-                              host='50.62.209.195',
-                              database='edusmil_bdd',connection_timeout=300,buffered=True)
+class CONST(object):
+    BD_USER = "bdd_dissertacao"
+    BD_PASSWORD = "Smil123!"
+    BD_HOST = "50.62.209.195"
+    BD_DATABASE = "uff_bdd_dissertacao"
+
+    def __setattr__(self, *_):
+        pass
+
+CONST = CONST()
+
+
+
+cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                              host=CONST.BD_HOST,
+                              database=BD_DATABASE,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= "SELECT git_language, git_word, id_gitsearch FROM git_search where git_status='P';"
@@ -37,9 +50,9 @@ for row in cursor._rows:
         page = page + 1
         print("pagina="+str(page))
         
-        cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
+        cnx = mysql.connector.connect(user='bdd_dissertacao', password='Smil123!',
                                 host='50.62.209.195',
-                                database='edusmil_bdd')
+                                database='uff_bdd_dissertacao')
         cursor = cnx.cursor(buffered=True)
         
         rpo1 = g.search_code(chr(34) + row[1].decode("utf-8")+chr(34)+" language:"+row[0].decode("utf-8"),'indexed','desc').get_page(page)
@@ -77,9 +90,9 @@ for row in cursor._rows:
     data = requests.get(url,headers=headers).json()
     print(json2html.convert(json=data,table_attributes='border="1"'))
     '''
-    cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
+    cnx = mysql.connector.connect(user='bdd_dissertacao', password='Smil123!',
                                 host='50.62.209.195',
-                                database='edusmil_bdd',connection_timeout=300)
+                                database='uff_bdd_dissertacao',connection_timeout=300)
     cursor = cnx.cursor(buffered=True)
     select_repository = ("SELECT id, full_name FROM git_table t where not exists (select 1 from git_stats s where s.id_repo=t.id and git_last_commit is not null) order by id;")
     cursor.execute(select_repository)
