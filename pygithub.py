@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# coding=utf-8 
+
+import codecs
 from github import Github
 import  requests
 import mysql.connector
@@ -29,7 +33,7 @@ rs_git_search = cursor.fetchall()
 
 for row in cursor._rows:
     
-    print("início linguagem:" + str(row[2].decode("utf-8"))
+    print("início linguagem:" + str(row[2].decode("utf-8")))
     
     select_repository = "SELECT id, git_page FROM git_control where git_entity='repository' and id_gitsearch=" + str(row[2].decode("utf-8"))
     cursor.execute(select_repository)
@@ -58,21 +62,28 @@ for row in cursor._rows:
                               database=CONST.BD_DATABASE)
         cursor = cnx.cursor(buffered=True)
         
-        print("lendo:" + r.repository.full_name + " " + r.name)
+        print("pesquisando:" + row[1].decode("utf-8"))
         rpo1 = g.search_code(chr(34) + row[1].decode("utf-8")+chr(34)+" language:"+row[0].decode("utf-8"),'indexed','desc').get_page(page)
         
         for r in rpo1:
             
+	    print("-------------------------------------------------")
             print("gravando:" + r.repository.full_name + " " + r.name)
             select_repository = ("SELECT 1 FROM git_table where id='" + str(r.repository.id) +"';")
             cursor.execute(select_repository)
             if cursor.rowcount == 0:
+                description = r.repository.description
+                if r.repository.description is None:
+ 		   description = "NULL"
+                else:
+                   description = r.repository.description.encode("utf-8","ignore").decode("utf-8")
+		
                 add_repository = ("INSERT INTO git_table "
                     "(id, name, full_name,owner, private, html_url, description,fork, url, forks_url, keys_url,collaborators_url, teams_url, hooks_url, "
                     " language,stargazers_count,watchers_count,size,id_gitsearch) "
-                    "VALUES ('" + str(r.repository.id) + "','"+str(r.repository.name)+"','" + str(r.repository.full_name) +"','"
+                    "VALUES ('" + str(r.repository.id) + "','"+str(r.repository.name.decode("utf-8"))+"','" + str(r.repository.full_name.decode("utf-8")) +"','"
                                 + str(r.repository.owner) + "','" + str(r.repository.private) + "','" + str(r.repository.html_url) + "','" 
-                                + str(r.repository.description).replace(chr(39),"") +"','" + str(r.repository.fork) +"','"
+                                + description.replace(chr(39),"") +"','" + str(r.repository.fork) +"','"
                                 + str(r.repository.url) + "','" + str(r.repository.forks_url) + "','" + str(r.repository.keys_url) + "','"
                                 + str(r.repository.collaborators_url) + "','" + str(r.repository.teams_url) + "','" + str(r.repository.hooks_url) + "','"
                                 + str(r.repository.language) + "','" + str(r.repository.stargazers_count) + "','" + str(r.repository.watchers_count) + "','" 
@@ -83,18 +94,20 @@ for row in cursor._rows:
                 cursor.execute(update_repository)
                 
             print("gravado:" + r.repository.full_name + " " + r.name)
-
+	    print("--------------------------------")	
         add_control = ("UPDATE git_control SET  git_page=" + str(page) +", git_date=now() where git_entity='repository' and id_gitsearch="+str(row[2].decode("utf-8"))+";")
         cursor.execute(add_control)
 
         cnx.commit()    
-        print("fim linguagem:" + str(row[2].decode("utf-8"))       
+        print("fim pagina:" + str(page))       
 
         cnx.close()
 
     
   
 cnx.close()
+print("fim linguagem:" + str(row[2].decode("utf-8")))
+
 print("fim")
 
    
