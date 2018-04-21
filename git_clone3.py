@@ -13,7 +13,7 @@ class CONST(object):
 
 CONST = CONST()
 
-def f_clone_pull(_url_repository, path):
+def f_clone_pull(_url_repository, path, erro):
     try:
         if os.path.exists(path)                       
             os.chdir(path)
@@ -28,7 +28,7 @@ def f_clone_pull(_url_repository, path):
         return git_grep.returncode
 
     except:
-        return ""
+        return "erro ao clonar repositório:" + _url_repository
 
 
 print("conectado ao banco")
@@ -38,7 +38,7 @@ cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
 cursor = cnx.cursor()
 print("banco de dados conectado")
 
-select_search= "SELECT html_url, name, id FROM git_table where dt_clone is null order by id;"
+select_search= "SELECT html_url, name, id FROM git_table where dt_clone is null where id=10389747 order by id;"
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
@@ -50,17 +50,23 @@ for row in cursor._rows:
     directory = REPO_DIR + str(row[1].decode("utf-8")) + "_" + str(row[2].decode("utf-8"))
 
     try:
-        
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
-        cursor = cnx.cursor()
-        update_clone="update git_table set dt_clone=now() where id="+str(row[2].decode("utf-8"))+";"
-        cursor.execute(update_clone)
-        cnx.commit() 
-        cnx.close()
+        erro = false
 
-        print(git_url)
+        ret = f_clone_pull(git_url, directory,erro)
+
+        if not erro
+            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                                          host=CONST.BD_HOST,
+                                  database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+            cursor = cnx.cursor()
+            update_clone="update git_table set dt_clone=now() where id="+str(row[2].decode("utf-8"))+";"
+            cursor.execute(update_clone)
+            cnx.commit() 
+            cnx.close()
+
+            print(git_url)
+        else:
+            print(ret)
     except Exception as error:
         print("erro" + str(error))
 
