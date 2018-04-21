@@ -1,3 +1,4 @@
+# coding=utf-8 
 import mysql.connector
 import os
 
@@ -15,7 +16,7 @@ CONST = CONST()
 
 def f_clone_pull(_url_repository, path, erro):
     try:
-        if os.path.exists(path)                       
+        if os.path.exists(path)          
             os.chdir(path)
             git_grep = subprocess.Popen(["git pull origin master"],
                              shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)        
