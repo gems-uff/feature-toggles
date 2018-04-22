@@ -2,6 +2,7 @@
 import mysql.connector
 import os
 import subprocess
+import datetime
 
 class CONST(object):
     BD_USER = "bdd_dissertacao"
@@ -15,13 +16,16 @@ class CONST(object):
 
 CONST = CONST()
 
+def f_retorna_data_hora():
+    return datetime.datetime.now().strftime("%H:%M:%S -- %d/%m/%Y")
+
 def f_clone_pull(_url_repository, path, erro):
     try:
         if os.path.exists(path):          
             print("acessando diretório " + path)
             os.chdir(path)
 	    print("git pull " + _url_repository)
-            git_clone = subprocess.Popen(["git pull origin master"],
+            git_clone = subprocess.Popen(["git pull -all"],
                              stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)        
         else:
 	    print("criando diretório " + path)
@@ -45,7 +49,7 @@ cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
 cursor = cnx.cursor()
 print("banco de dados conectado")
 
-select_search= "SELECT html_url, name, id FROM git_table where dt_clone is null and id in (10389747,68818228) order by id;"
+select_search= "SELECT html_url, name, id FROM git_table where dt_clone is null order by id limit 0,100;"
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
@@ -53,7 +57,7 @@ print("consulta realizada")
 ret = ""
 
 for row in cursor._rows:
-    print("=====================================================")
+    print(f_retorna_data_hora() + "=====================================================")
     git_url = str(row[0].decode("utf-8"))+".git"
     directory = CONST.REPO_DIR + str(row[1].decode("utf-8")) + "_" + str(row[2].decode("utf-8"))
 
@@ -73,8 +77,8 @@ for row in cursor._rows:
 
         else:
             print(ret)
-        
-	print("======================================================")
+       
+	print(f_retorna_data_hora() + "======================================================")
     except Exception as error:
         print("erro: " + error.strerror)
 
