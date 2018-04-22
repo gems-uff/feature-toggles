@@ -1,6 +1,7 @@
 # coding=utf-8 
 import mysql.connector
 import os
+import subprocess
 
 class CONST(object):
     BD_USER = "bdd_dissertacao"
@@ -16,19 +17,24 @@ CONST = CONST()
 
 def f_clone_pull(_url_repository, path, erro):
     try:
-        if os.path.exists(path)          
+        if os.path.exists(path):          
+            print("acessando diretório " + path)
             os.chdir(path)
-            git_grep = subprocess.Popen(["git pull origin master"],
-                             shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)        
+	    print("git pull " + _url_repository)
+            git_clone = subprocess.Popen(["git pull origin master"],
+                             stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)        
         else:
-            if not os.path.exists(path):
-                os.makedirs(path)        
-                git_grep = subprocess.Popen(["git clone -q " +  _url_repository + " " + path],
-                               shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        output, error = git_grep.communicate()
-        return git_grep.returncode
+	    print("criando diretório " + path)
+            os.makedirs(path)       
+	    print("inicio: git clone " + _url_repository)
+            git_clone = subprocess.Popen(["git", "clone", _url_repository, path],
+                               stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+            print("fim:  git clone " + _url_repository)
+        output, error = git_clone.communicate()	
+        return git_clone.returncode
 
     except:
+	erro = True
         return "erro ao clonar repositório:" + _url_repository
 
 
@@ -39,23 +45,23 @@ cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
 cursor = cnx.cursor()
 print("banco de dados conectado")
 
-select_search= "SELECT html_url, name, id FROM git_table where dt_clone is null where id=10389747 order by id;"
+select_search= "SELECT html_url, name, id FROM git_table where dt_clone is null and id in (10389747,68818228) order by id;"
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
 print("consulta realizada")
-
+ret = ""
 
 for row in cursor._rows:
+    print("=====================================================")
     git_url = str(row[0].decode("utf-8"))+".git"
-    directory = REPO_DIR + str(row[1].decode("utf-8")) + "_" + str(row[2].decode("utf-8"))
+    directory = CONST.REPO_DIR + str(row[1].decode("utf-8")) + "_" + str(row[2].decode("utf-8"))
 
     try:
-        erro = false
+  	erro = False
 
-        ret = f_clone_pull(git_url, directory,erro)
-
-        if not erro
+    	ret = f_clone_pull(git_url, directory,erro)
+        if not erro:
             cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
                                           host=CONST.BD_HOST,
                                   database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
@@ -65,11 +71,12 @@ for row in cursor._rows:
             cnx.commit() 
             cnx.close()
 
-            print(git_url)
         else:
             print(ret)
+        
+	print("======================================================")
     except Exception as error:
-        print("erro" + str(error))
+        print("erro: " + error.strerror)
 
 
 print("FIM")
