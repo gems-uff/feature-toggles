@@ -38,7 +38,7 @@ for row in cursor._rows:
         lista_commit = lista_commit.decode("utf-8")
 
         _split_commit = lista_commit.split("\n")
-	    sql_insert = ""
+        sql_insert = ""
 	    primeiro_commit = ""
         for _commit in _split_commit:
             if _commit != "":
@@ -70,7 +70,8 @@ for row in cursor._rows:
                               database='edusmil_bdd',connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
             if sql_insert != "":
-	        sql_insert = sql_insert[:len(sql_insert)-1]
+	            sql_insert = sql_insert[:len(sql_insert)-1]
+
             insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
             cursor.execute(insert_search)
             cnx.close()   
