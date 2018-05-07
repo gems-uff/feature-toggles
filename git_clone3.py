@@ -24,13 +24,13 @@ def f_clone_pull(_url_repository, path, erro):
         if os.path.exists(path):          
             print("acessando diretório " + path)
             os.chdir(path)
-	    print("git pull " + _url_repository)
+	        print("git pull " + _url_repository)
             git_clone = subprocess.Popen(["git pull --all"],
                              stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)        
         else:
-	    print("criando diretório " + path)
+	        print("criando diretório " + path)
             os.makedirs(path)       
-	    print("inicio: git clone " + _url_repository)
+	        print("inicio: git clone " + _url_repository)
             git_clone = subprocess.Popen(["git", "clone", _url_repository, path],
                                stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
             print("fim:  git clone " + _url_repository)
