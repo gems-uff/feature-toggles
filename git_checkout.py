@@ -3,6 +3,18 @@ import mysql.connector
 import os
 import re
 
+class CONST(object):
+    BD_USER = "bdd_dissertacao"
+    BD_PASSWORD = "Smil123!"
+    BD_HOST = "50.62.209.195"
+    BD_DATABASE = "uff_bdd_dissertacao"
+    REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
+
+    def __setattr__(self, *_):
+        pass
+
+CONST = CONST()
+
 def grep(grep_string, files):
     try:
         print(grep_string);
@@ -18,9 +30,48 @@ def grep(grep_string, files):
     except:
         return ""
 
-cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
-                              host='50.62.209.195',
-                              database='edusmil_bdd',connection_timeout=300,buffered=True)
+def getParentCommitMerge(hash_parent):
+    #separador espaço
+    try:
+        git_parents = subprocess.Popen(["git log --pretty=%P -n 1",hash_parent],
+                                stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+        return git_parents
+    except:
+        return ""
+
+def getCommitsBetween(hash_parent1, hash_parent2):
+    #separador \n
+    try:
+        git_hashs = subprocess.Popen(["git log --format='%H' --no-merges ",hash_parent1 + ".. " + hash_parent2],                    
+                                stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+        return git_hashs
+    except:
+        return ""
+
+def getMergeBase(hash_parent1, hash_parent2):
+    #separador \n
+    try:
+        git_hashBase = subprocess.Popen(["git merge-base " + hash_parent1 + " " + hash_parent2],
+                                stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = git_grep.communicate()
+        return git_hashBase
+    except:
+        return ""
+
+def getAuthorsBetween(hash_parent1, hash_parent2):
+    #separador \n
+    try:
+        git_Authors = subprocess.Popen(["git shortlog -sne --no-merges ",hash_parent1 + ".. " + hash_parent2],
+                                stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = git_grep.communicate()
+        return git_Authors
+    except:
+        return ""
+
+
+cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                              host=CONST.BD_HOST,
+                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, s.git_word, s.git_file_extension FROM git_table t, git_search s " 
@@ -39,11 +90,11 @@ for row in cursor._rows:
 
         _split_commit = lista_commit.split("\n")
         sql_insert = ""
-	    primeiro_commit = ""
+	    ultimo_commit = ""
         for _commit in _split_commit:
             if _commit != "":
                 if sql_insert == "":
-		            primeiro_commit = str(_commit) 
+		            ultimo_commit = str(_commit) 
                
                 print(str(_commit))
 	            subprocess.check_output(["git checkout -f "+_commit],stderr=subprocess.STDOUT,shell=True)
@@ -65,9 +116,9 @@ for row in cursor._rows:
             
 	            sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",1,now(),'" + str(_commit) + "'," + str(flag_fw) + "),"
 	 
-	        cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
-                              host='50.62.209.195',
-                              database='edusmil_bdd',connection_timeout=300,buffered=True)
+	        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                              host=CONST.BD_HOST,
+                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
             if sql_insert != "":
 	            sql_insert = sql_insert[:len(sql_insert)-1]
@@ -76,7 +127,7 @@ for row in cursor._rows:
             cursor.execute(insert_search)
             cnx.close()   
 	
-	    lista_commit = subprocess.check_output([" git rev-list --min-parents=2 " +  primeiro_commit],stderr=subprocess.STDOUT,shell=True)
+	    lista_commit = subprocess.check_output([" git rev-list --min-parents=2 " +  ultimo_commit],stderr=subprocess.STDOUT,shell=True)
         lista_commit = lista_commit.decode("utf-8")
 
 	    _split_commit = lista_commit.split("\n")
@@ -87,9 +138,9 @@ for row in cursor._rows:
             if _commit != "":
                sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",5,now(),'" + str(_commit) + "',NULL),"
 
-	        cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
-                              host='50.62.209.195',
-                              database='edusmil_bdd',connection_timeout=300,buffered=True)
+	        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                              host=CONST.BD_HOST,
+                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
             if sql_insert != "":
                 sql_insert = sql_insert[:len(sql_insert)-1]
