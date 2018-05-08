@@ -1,5 +1,5 @@
- O volume na unidade C ‚ OS
- O N£mero de S‚rie do Volume ‚ 14E4-665C
+ O volume na unidade C ï¿½ OS
+ O Nï¿½mero de Sï¿½rie do Volume ï¿½ 14E4-665C
 
  Pasta de C:\inetpub\wwwroot\feature_toggles
 aaaaaaaaaa
@@ -19,6 +19,7 @@ aaaaaaaaaa
 06/05/2018  15:29             2.033 send_email.py
 06/05/2018  16:38                 0 teste.txt
               12 arquivo(s)         31.390 bytes
-               3 pasta(s)   198.802.137.088 bytes dispon¡veis
+               3 pasta(s)   198.802.137.088 bytes disponï¿½veis
 			   
 			   12312312321312
+aaaaaaaaaa
