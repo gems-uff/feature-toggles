@@ -27,7 +27,7 @@ def f_clone_pull(_url_repository, path, erro):
             print("git checkout master " + _url_repository)
             git_clone = subprocess.Popen(["git pull --all"],
                              stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-	        print("git pull " + _url_repository)
+            print("git pull " + _url_repository)
             git_clone = subprocess.Popen(["git pull --all"],
                              stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)        
         else:
@@ -52,7 +52,7 @@ cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
 cursor = cnx.cursor()
 print("banco de dados conectado")
 
-select_search= "SELECT html_url, name, id FROM git_table where dt_clone is null order by id limit 0,100;"
+select_search= "SELECT html_url, name, id FROM git_table where dt_clone is null order by id;"
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
