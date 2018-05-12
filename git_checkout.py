@@ -85,7 +85,7 @@ cnx.close()
 repo_dir="//home//eduardosmil//featuretoggles//git_repositories//"
 for row in cursor._rows:
     os.chdir(repo_dir + str(row[1].decode("utf-8")) + "_" + str(row[0].decode("utf-8")))
-    
+    print(repo_dir + str(row[1].decode("utf-8")) + "_" + str(row[0].decode("utf-8")))
     try:
         subprocess.check_output(["git checkout master"],stderr=subprocess.STDOUT,shell=True)
 
@@ -120,12 +120,12 @@ for row in cursor._rows:
             
                 sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",1,now(),'" + str(_commit) + "'," + str(flag_fw) + "),"
 	 
-            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
                               host=CONST.BD_HOST,
                               database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
-            cursor = cnx.cursor()
-            if sql_insert != "":
-	            sql_insert = sql_insert[:len(sql_insert)-1]
+        cursor = cnx.cursor()
+        if sql_insert != "":
+	        sql_insert = sql_insert[:len(sql_insert)-1]
 
             insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
             cursor.execute(insert_search)
