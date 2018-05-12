@@ -24,6 +24,9 @@ def f_clone_pull(_url_repository, path, erro):
         if os.path.exists(path):          
             print("acessando diretório " + path)
             os.chdir(path)
+            print("git checkout master " + _url_repository)
+            git_clone = subprocess.Popen(["git pull --all"],
+                             stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
 	        print("git pull " + _url_repository)
             git_clone = subprocess.Popen(["git pull --all"],
                              stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)        
