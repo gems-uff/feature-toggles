@@ -147,9 +147,9 @@ for row in cursor._rows:
             cursor = cnx.cursor()
             if sql_insert != "":
                 sql_insert = sql_insert[:len(sql_insert)-1]
-       	    insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
-            cursor.execute(insert_search)
-            cnx.close()
+       	        insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
+                cursor.execute(insert_search)
+                cnx.close()
  
     except subprocess.CalledProcessError as e:
         print(e.output)
