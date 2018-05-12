@@ -141,15 +141,15 @@ for row in cursor._rows:
             if _commit != "":
                 sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",5,now(),'" + str(_commit) + "',NULL),"
             
-            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
                             host=CONST.BD_HOST,
                             database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
-            cursor = cnx.cursor()
-            if sql_insert != "":
-                sql_insert = sql_insert[:len(sql_insert)-1]
-       	        insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
-                cursor.execute(insert_search)
-                cnx.close()
+        cursor = cnx.cursor()
+        if sql_insert != "":
+            sql_insert = sql_insert[:len(sql_insert)-1]
+       	    insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
+            cursor.execute(insert_search)
+            cnx.close()
  
     except subprocess.CalledProcessError as e:
         print(e.output)
