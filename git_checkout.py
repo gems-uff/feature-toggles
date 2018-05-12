@@ -18,7 +18,7 @@ CONST = CONST()
 
 def grep(grep_string, files):
     try:
-        print(grep_string);
+        print(grep_string)
         if files != "":
             git_grep = subprocess.Popen(["git grep -E -i -q " + chr(34) + grep_string + chr(34) + " -- '" + files+"'"],
                                shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -76,7 +76,8 @@ cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
 cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, s.git_word, s.git_file_extension FROM git_table t, git_search s " 
-select_search= select_search + "where s.id_gitsearch=t.id_gitsearch and t.dt_clone is not null and not exists (select 1 from git_stats_local gl where id_repo=t.id)  and ((cd_classe is null) or (cd_classe = 'ok'));"
+select_search= select_search + "where s.id_gitsearch=t.id_gitsearch and t.dt_clone is not null and "
+select_search= select_search + " not exists (select 1 from git_stats_local gl where id_repo=t.id)  and ((cd_classe is null) or (cd_classe = 'ok')) limit 0,1;"
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
@@ -86,19 +87,21 @@ for row in cursor._rows:
     os.chdir(repo_dir + str(row[1].decode("utf-8")) + "_" + str(row[0].decode("utf-8")))
     
     try:
+        subprocess.check_output(["git checkout master"],stderr=subprocess.STDOUT,shell=True)
+
         lista_commit = subprocess.check_output(["git rev-list --all"],stderr=subprocess.STDOUT,shell=True)
         lista_commit = lista_commit.decode("utf-8")
 
         _split_commit = lista_commit.split("\n")
         sql_insert = ""
-	    ultimo_commit = ""
+        ultimo_commit = ""
         for _commit in _split_commit:
             if _commit != "":
                 if sql_insert == "":
-		            ultimo_commit = str(_commit) 
+                    ultimo_commit = str(_commit) 
                
                 print(str(_commit))
-	            subprocess.check_output(["git checkout -f "+_commit],stderr=subprocess.STDOUT,shell=True)
+                subprocess.check_output(["git checkout -f "+_commit],stderr=subprocess.STDOUT,shell=True)
                 git_grep =grep(str(row[3].decode("utf-8")),str(row[4].decode("utf-8")))
 
                 flag_fw = ""
@@ -115,9 +118,9 @@ for row in cursor._rows:
                   print("erro:" + str(row[0].decode("utf-8")))        
                   break
             
-	            sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",1,now(),'" + str(_commit) + "'," + str(flag_fw) + "),"
+                sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",1,now(),'" + str(_commit) + "'," + str(flag_fw) + "),"
 	 
-	        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
                               host=CONST.BD_HOST,
                               database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
@@ -128,20 +131,19 @@ for row in cursor._rows:
             cursor.execute(insert_search)
             cnx.close()   
 	
-	    lista_commit = subprocess.check_output([" git rev-list --min-parents=2 " +  ultimo_commit],stderr=subprocess.STDOUT,shell=True)
+        lista_commit = subprocess.check_output([" git rev-list --min-parents=2 " +  ultimo_commit],stderr=subprocess.STDOUT,shell=True)
         lista_commit = lista_commit.decode("utf-8")
 
-	    _split_commit = lista_commit.split("\n")
-	
-	    sql_insert = ""
-
-	    for _commit in _split_commit:
+        _split_commit = lista_commit.split("\n")
+        sql_insert = ""
+        
+        for _commit in _split_commit:
             if _commit != "":
                sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",5,now(),'" + str(_commit) + "',NULL),"
-
-	        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+            
+            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                            host=CONST.BD_HOST,
+                            database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
             if sql_insert != "":
                 sql_insert = sql_insert[:len(sql_insert)-1]
