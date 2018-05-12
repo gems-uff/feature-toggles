@@ -41,7 +41,7 @@ def Verifica_Clonagem():
             server.ehlo()
             server.starttls()
             #Next, log in to the server
-            server.login("sistema@sistemaisbet.org.br", "isbet123")
+            server.login("sistema@sistemaisbet.org.br", "b##et12@3##")
 
             #Send the mail
             body = "Ùltima data de clone:" + str(row[1].decode("utf-8"))# The /n separates the message from the headers
@@ -49,7 +49,7 @@ def Verifica_Clonagem():
             msg['From'] = "sistema@sistemaisbet.org.br"
             msg['To'] = "eduardosmil@gmail.com"
             msg['Subject'] = "Monitoramento Pegasus"
-            server.sendmail("sistema@sistemaisbet.org.br", "eduardosmil@gmail.com", msg.as_string())
+            server.sendmail("sistema@sistemaisbet.org.br", "eduaardosami2al@gmail.com", msg.as_string())
 
             server.quit()
 

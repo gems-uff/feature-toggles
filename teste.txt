@@ -1,0 +1,25 @@
+ O volume na unidade C � OS
+ O N�mero de S�rie do Volume � 14E4-665C
+
+ Pasta de C:\inetpub\wwwroot\feature_toggles
+aaaaaaaaaa
+06/05/2018  16:38    <DIR>          .
+06/05/2018  16:38    <DIR>          ..
+06/05/2018  15:34                 9 .gitignore
+06/05/2018  15:18               163 .remote
+21/04/2018  15:11    <DIR>          extensions
+21/04/2018  15:11             7.271 git_bisect.py
+06/05/2018  15:33             4.800 git_checkout.py
+21/04/2018  15:11             1.796 git_clone.py
+21/04/2018  15:11             1.478 git_clone2.py
+06/05/2018  15:29             3.089 git_clone3.py
+21/04/2018  15:11             4.467 git_stats_api.py
+21/04/2018  15:55             6.074 pygithub.py
+06/05/2018  15:29               210 README.md
+06/05/2018  15:29             2.033 send_email.py
+06/05/2018  16:38                 0 teste.txt
+              12 arquivo(s)         31.390 bytes
+               3 pasta(s)   198.802.137.088 bytes dispon�veis
+			   
+			   12312312321312
+aaaaaaaaaa
