@@ -28,7 +28,7 @@ def f_clone_pull(_url_repository, path, erro):
             git_clone = subprocess.Popen(["git checkout master"],
                              stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
             print("git pull " + _url_repository)
-            git_clone = subprocess.Popen(["git pull --all"],
+            git_clone = subprocess.Popen(["for i in $(git branch | sed 's/^.//'); do git checkout $i; git pull; done"],
                              stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)        
         else:
 	        print("criando diretório " + path)
