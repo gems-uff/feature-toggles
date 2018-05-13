@@ -36,7 +36,7 @@ def getParentCommitMerge(hash_parent):
     try:
         git_parents = subprocess.Popen(["git log --pretty=%P -n 1",hash_parent],
                                 shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        return git_parents
+        return git_parents.stdout
     except:
         return ""
 
@@ -45,7 +45,7 @@ def getCommitsBetween(hash_parent1, hash_parent2):
     try:
         git_hashs = subprocess.Popen(["git log --format=%H --no-merges ",hash_parent1 + ".. " + hash_parent2],                    
                                 shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        return git_hashs
+        return git_hashs.stdout
     except:
         return ""
 
@@ -55,7 +55,7 @@ def getMergeBase(hash_parent1, hash_parent2):
         git_hashBase = subprocess.Popen(["git merge-base " + hash_parent1 + " " + hash_parent2],
                                 shell = True,stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = git_grep.communicate()
-        return git_hashBase
+        return git_hashBase.stdout
     except:
         return ""
 
@@ -65,7 +65,7 @@ def getAuthorsBetween(hash_parent1, hash_parent2):
         git_Authors = subprocess.Popen(["git shortlog -sne --no-merges ",hash_parent1 + ".. " + hash_parent2],
                                 shell = True,stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = git_grep.communicate()
-        return git_Authors
+        return git_Authors.stdout
     except:
         return ""
 
