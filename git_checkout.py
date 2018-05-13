@@ -89,13 +89,13 @@ for row in cursor._rows:
     try:
         subprocess.check_output(["git checkout -f master"],stderr=subprocess.STDOUT,shell=True)
 
-        #
-        #lista_commit = subprocess.check_output(["git rev-list --all"],stderr=subprocess.STDOUT,shell=True)
-        #lista_commit = lista_commit.decode("utf-8")
+        
+        lista_commit = subprocess.check_output(["git rev-list --all"],stderr=subprocess.STDOUT,shell=True)
+        lista_commit = lista_commit.decode("utf-8")
 
-        #_split_commit = lista_commit.split("\n")
-        #sql_insert = ""
-        #ultimo_commit = ""
+        _split_commit = lista_commit.split("\n")
+        sql_insert = ""
+        ultimo_commit = ""
         for _commit in _split_commit:
             if _commit != "":
                 if sql_insert == "":
