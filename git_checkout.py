@@ -143,15 +143,15 @@ for row in cursor._rows:
 
                 print("Verificando Merge Parents...")
                 lista_commit_parents = getParentCommitMerge(_commit)
-                if lista_commit_parents != "":
+                if lista_commit_parents != "" and lista_commit_parents is not None:
                     _split_commit_parents = lista_commit_parents.split(" ")
-                    print(lista_commit_parents)
+                    print("a"+lista_commit_parents+"b")
                     git_parent = getMergeBase(_split_commit_parents[0],_split_commit_parents[1])
 
                     _mais_dev_1 = False
                     _mais_dev_2 = False
 
-                    if git_parent != "":
+                    if git_parent != "" and git_parent is not None:
                         _lista_commit_b1 = getCommitsBetween(git_parent,_split_commit_parents[0])
                         _lista_commit_b2 = getCommitsBetween(git_parent,_split_commit_parents[1])
 
