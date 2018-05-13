@@ -63,7 +63,7 @@ def getAuthorsBetween(hash_parent1, hash_parent2):
     #separador \n
     try:
         git_Authors = subprocess.Popen(["git shortlog -sne --no-merges ",hash_parent1 + ".. " + hash_parent2],
-                                shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+                                shell = True,stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = git_grep.communicate()
         return git_Authors
     except:
@@ -89,7 +89,6 @@ for row in cursor._rows:
     try:
         subprocess.check_output(["git checkout -f master"],stderr=subprocess.STDOUT,shell=True)
 
-        
         lista_commit = subprocess.check_output(["git rev-list --all"],stderr=subprocess.STDOUT,shell=True)
         lista_commit = lista_commit.decode("utf-8")
 
@@ -101,36 +100,36 @@ for row in cursor._rows:
                 if sql_insert == "":
                     ultimo_commit = str(_commit) 
                
-        #       print(str(_commit))
-        #        subprocess.check_output(["git checkout -f "+_commit],stderr=subprocess.STDOUT,shell=True)
-        #        git_grep =grep(str(row[3].decode("utf-8")),str(row[4].decode("utf-8")))
-        #
-        #        flag_fw = ""
-        #   
-        #        if git_grep == 0: # found
-        #          #print("achou")                
-        #          flag_fw = "'fw'"
-        #                    
-        #        elif git_grep == 1: # not found
-        #          #print("nao achou")                
-        #          flag_fw = "NULL"
+                print(str(_commit))
+                subprocess.check_output(["git checkout -f "+_commit],stderr=subprocess.STDOUT,shell=True)
+                git_grep =grep(str(row[3].decode("utf-8")),str(row[4].decode("utf-8")))
 
-        #        elif git_grep > 1: # error
-        #          print("erro:" + str(row[0].decode("utf-8")))        
-        #          break
+                flag_fw = ""
+           
+                if git_grep == 0: # found
+                  #print("achou")                
+                  flag_fw = "'fw'"
+                            
+                elif git_grep == 1: # not found
+                  #print("nao achou")                
+                  flag_fw = "NULL"
+
+                elif git_grep > 1: # error
+                  print("erro:" + str(row[0].decode("utf-8")))        
+                  break
             
-        #        sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",1,now(),'" + str(_commit) + "'," + str(flag_fw) + "),"
+                sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",1,now(),'" + str(_commit) + "'," + str(flag_fw) + "),"
 	 
-        #cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-        #                      host=CONST.BD_HOST,
-        #                      database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
-        #cursor = cnx.cursor()
-        #if sql_insert != "":
-        #    sql_insert = sql_insert[:len(sql_insert)-1]
+        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                              host=CONST.BD_HOST,
+                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cursor = cnx.cursor()
+        if sql_insert != "":
+            sql_insert = sql_insert[:len(sql_insert)-1]
 
-        #    insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
-        #    cursor.execute(insert_search)
-        #    cnx.close()   
+            insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
+            #cursor.execute(insert_search)
+            #cnx.close()   
 	
         lista_commit = subprocess.check_output([" git rev-list --min-parents=2 " +  ultimo_commit],stderr=subprocess.STDOUT,shell=True)
         lista_commit = lista_commit.decode("utf-8")
