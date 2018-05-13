@@ -148,6 +148,8 @@ for row in cursor._rows:
                     print("a"+lista_commit_parents+"b")
                     git_parent = getMergeBase(_split_commit_parents[0],_split_commit_parents[1])
 
+                    print("parent:" + git_parent)
+
                     _mais_dev_1 = False
                     _mais_dev_2 = False
 
