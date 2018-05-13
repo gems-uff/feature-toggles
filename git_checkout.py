@@ -34,7 +34,7 @@ def grep(grep_string, files):
 def getParentCommitMerge(hash_parent):
     #separador espaço
     try:
-        git_parents = subprocess.check_output(["git log --pretty=%P -n 1",hash_parent],stderr=subprocess.STDOUT,shell=True)
+        git_parents = subprocess.check_output(["git log --pretty=%P -n 1 " + hash_parent],stderr=subprocess.STDOUT,shell=True)
         git_parents = git_parents.decode("utf-8")
         return git_parents
     except:
@@ -43,7 +43,7 @@ def getParentCommitMerge(hash_parent):
 def getCommitsBetween(hash_parent1, hash_parent2):
     #separador \n
     try:
-        git_hashs = subprocess.check_output(["git log --format=%H --no-merges ",hash_parent1 + ".. " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
+        git_hashs = subprocess.check_output(["git log --format=%H --no-merges " + hash_parent1 + ".. " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
         git_hashs = git_hashs.decode("utf-8")
         return git_hashs
     except:
@@ -61,7 +61,7 @@ def getMergeBase(hash_parent1, hash_parent2):
 def getAuthorsBetween(hash_parent1, hash_parent2):
     #separador \n
     try:
-        git_Authors = subprocess.check_output(["git shortlog -sne --no-merges ",hash_parent1 + ".. " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
+        git_Authors = subprocess.check_output(["git shortlog -sne --no-merges "+ hash_parent1 + ".. " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
         git_Authors = git_Authors.decode("utf-8")
         return git_Authors
     except:
