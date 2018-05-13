@@ -141,7 +141,7 @@ for row in cursor._rows:
             if _commit != "":
                 sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",5,now(),'" + str(_commit) + "',NULL),"
 
-                print("Verificando Merge Parents...")
+                print("Verificando Merge Parents..." + _commit)  
                 lista_commit_parents = getParentCommitMerge(_commit)
                 if lista_commit_parents != "" and lista_commit_parents is not None:
                     _split_commit_parents = lista_commit_parents.split(" ")
