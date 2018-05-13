@@ -43,7 +43,7 @@ def getParentCommitMerge(hash_parent):
 def getCommitsBetween(hash_parent1, hash_parent2):
     #separador \n
     try:
-        git_hashs = subprocess.check_output(["git log --format=%H --no-merges " + hash_parent1 + ".. " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
+        git_hashs = subprocess.check_output(["git log --format=%H --no-merges " + hash_parent1 + ".." + hash_parent2],stderr=subprocess.STDOUT,shell=True)
         git_hashs = git_hashs.decode("utf-8")
         return git_hashs
     except:
@@ -168,10 +168,11 @@ for row in cursor._rows:
                         
                         print("Merge: " + _commit + " Pai 2:" + _split_commit_parents[1])
 
-                        _lista_commit_p2 = getAuthorsBetween(git_parent,_lista_commit_b2[0])
+                        _split_commit_b2 = _lista_commit_b2.split("\n")
+                        _lista_commit_p2 = getAuthorsBetween(git_parent,_split_commit_b2[0])
                         
                         _split_commit_p2 = _lista_commit_p2.split("\n")
-                        if len(_lista_commit_p2) >= 2: # mais de 2 desenvolvedores
+                        if len(_split_commit_p2) >= 2: # mais de 2 desenvolvedores
                             _mais_dev_2 = True
 
                         if ((_mais_dev_1 == True) and (_mais_dev_2 == True)):
