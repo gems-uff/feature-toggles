@@ -96,11 +96,11 @@ for row in cursor._rows:
         #_split_commit = lista_commit.split("\n")
         #sql_insert = ""
         #ultimo_commit = ""
-        #for _commit in _split_commit:
-        #    if _commit != "":
-        #        if sql_insert == "":
-        #            ultimo_commit = str(_commit) 
-        #       
+        for _commit in _split_commit:
+            if _commit != "":
+                if sql_insert == "":
+                    ultimo_commit = str(_commit) 
+               
         #       print(str(_commit))
         #        subprocess.check_output(["git checkout -f "+_commit],stderr=subprocess.STDOUT,shell=True)
         #        git_grep =grep(str(row[3].decode("utf-8")),str(row[4].decode("utf-8")))
