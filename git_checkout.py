@@ -145,6 +145,7 @@ for row in cursor._rows:
                 lista_commit_parents = getParentCommitMerge(_commit)
                 if lista_commit_parents != "":
                     _split_commit_parents = lista_commit_parents.split(" ")
+                    print(lista_commit_parents)
                     git_parent = getMergeBase(_split_commit_parents[0],_split_commit_parents[1])
 
                     _mais_dev_1 = False
