@@ -34,38 +34,36 @@ def grep(grep_string, files):
 def getParentCommitMerge(hash_parent):
     #separador espaço
     try:
-        git_parents = subprocess.Popen(["git log --pretty=%P -n 1",hash_parent],
-                                shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        return git_parents.stdout
+        git_parents = subprocess.check_output(["git log --pretty=%P -n 1",hash_parent],stderr=subprocess.STDOUT,shell=True)
+        git_parents = git_parents.decode("utf-8")
+        return git_parents
     except:
         return ""
 
 def getCommitsBetween(hash_parent1, hash_parent2):
     #separador \n
     try:
-        git_hashs = subprocess.Popen(["git log --format=%H --no-merges ",hash_parent1 + ".. " + hash_parent2],                    
-                                shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        return git_hashs.stdout
+        git_hashs = subprocess.check_output(["git log --format=%H --no-merges ",hash_parent1 + ".. " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
+        git_hashs = git_hashs.decode("utf-8")
+        return git_hashs
     except:
         return ""
 
 def getMergeBase(hash_parent1, hash_parent2):
     #separador \n
     try:
-        git_hashBase = subprocess.Popen(["git merge-base " + hash_parent1 + " " + hash_parent2],
-                                shell = True,stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        output, error = git_grep.communicate()
-        return git_hashBase.stdout
+        git_hashBase = subprocess.check_output(["git merge-base " + hash_parent1 + " " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
+        git_hashBase = git_hashBase.decode("utf-8")
+        return git_hashBase
     except:
         return ""
 
 def getAuthorsBetween(hash_parent1, hash_parent2):
     #separador \n
     try:
-        git_Authors = subprocess.Popen(["git shortlog -sne --no-merges ",hash_parent1 + ".. " + hash_parent2],
-                                shell = True,stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
-        output, error = git_grep.communicate()
-        return git_Authors.stdout
+        git_Authors = subprocess.check_output(["git shortlog -sne --no-merges ",hash_parent1 + ".. " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
+        git_Authors = git_Authors.decode("utf-8")
+        return git_Authors
     except:
         return ""
 
