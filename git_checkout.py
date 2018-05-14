@@ -61,7 +61,7 @@ def getMergeBase(hash_parent1, hash_parent2):
 def getAuthorsBetween(hash_parent1, hash_parent2):
     #separador \n
     try:
-        git_Authors = subprocess.check_output(["git shortlog -sne --no-merges "+ hash_parent1 + ".. " + hash_parent2],stderr=subprocess.STDOUT,shell=True)
+        git_Authors = subprocess.check_output(["git shortlog -sne --no-merges "+ hash_parent1 + ".." + hash_parent2],stderr=subprocess.STDOUT,shell=True)
         git_Authors = git_Authors.decode("utf-8")
         return git_Authors
     except:
@@ -176,8 +176,8 @@ for row in cursor._rows:
                             _mais_dev_2 = True
 
                         if ((_mais_dev_1 == True) and (_mais_dev_2 == True)):
-                            print("Merge Branch: " + str(_commit))
-                            sql_insert_merge_branch = sql_insert_merge_branch + + "(" + str(row[0].decode("utf-8")) +  ",6,now(),'" + str(_commit) + "',NULL),"
+                            print("Merge Branch..............: " + str(_commit))
+                            sql_insert_merge_branch = sql_insert_merge_branch + "(" + str(row[0].decode("utf-8")) +  ",6,now(),'" + str(_commit) + "',NULL),"
             
         cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
                             host=CONST.BD_HOST,
