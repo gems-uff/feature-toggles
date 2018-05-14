@@ -204,6 +204,8 @@ for row in cursor._rows:
             cursor.execute(insert_search)
             cnx.close()
 
+        subprocess.check_output(["git checkout -f master"],stderr=subprocess.STDOUT,shell=True)
+
         lista_commit = subprocess.check_output(["git log --regexp-ignore-case --grep 'merge branch' --format=format:%H "],stderr=subprocess.STDOUT,shell=True)
         lista_commit = lista_commit.decode("utf-8")
 
@@ -214,12 +216,14 @@ for row in cursor._rows:
             if _commit != "":
                sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",7,now(),'" + str(_commit) + "',NULL),"
             
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                            host=CONST.BD_HOST,
-                            database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
-        cursor = cnx.cursor()
         if sql_insert != "":
             sql_insert = sql_insert[:len(sql_insert)-1]
+
+            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                            host=CONST.BD_HOST,
+                            database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+            cursor = cnx.cursor()
+
        	    insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
             cursor.execute(insert_search)
             cnx.close()
