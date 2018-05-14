@@ -43,7 +43,7 @@ def getParentCommitMerge(hash_parent):
 def getCommitsBetween(hash_parent1, hash_parent2):
     #separador \n
     try:
-        git_hashs = subprocess.check_output(["git log --format=%H --no-merges " + hash_parent1 + ".." + hash_parent2],stderr=subprocess.STDOUT,shell=True)
+        git_hashs = subprocess.check_output(["git log --format=%H --no-merges " + hash_parent1[0:5] + ".." + hash_parent2[0:5]],stderr=subprocess.STDOUT,shell=True)
         git_hashs = git_hashs.decode("utf-8")
         return git_hashs
     except:
