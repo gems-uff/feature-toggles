@@ -99,8 +99,8 @@ for row in cursor._rows:
                     ultimo_commit = str(_commit) 
                
                 print(str(_commit))
-                #subprocess.check_output(["git checkout -f "+_commit],stderr=subprocess.STDOUT,shell=True)
-                #git_grep =grep(str(row[3].decode("utf-8")),str(row[4].decode("utf-8")))
+                subprocess.check_output(["git checkout -f "+_commit],stderr=subprocess.STDOUT,shell=True)
+                git_grep =grep(str(row[3].decode("utf-8")),str(row[4].decode("utf-8")))
                 git_grep = 0
 
                 flag_fw = ""
@@ -127,8 +127,8 @@ for row in cursor._rows:
             sql_insert = sql_insert[:len(sql_insert)-1]
 
             insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
-            #cursor.execute(insert_search)
-            #cnx.close()   
+            cursor.execute(insert_search)
+            cnx.close()   
 	
         lista_commit = subprocess.check_output([" git rev-list --min-parents=2 " +  ultimo_commit],stderr=subprocess.STDOUT,shell=True)
         lista_commit = lista_commit.decode("utf-8")
@@ -192,6 +192,11 @@ for row in cursor._rows:
        	    insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
             cursor.execute(insert_search)
             cnx.close()
+        
+        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                            host=CONST.BD_HOST,
+                            database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cursor = cnx.cursor()
 
         if sql_insert_merge_branch != "":
             sql_insert_merge_branch = sql_insert_merge_branch[:len(sql_insert_merge_branch)-1]
