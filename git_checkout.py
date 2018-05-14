@@ -75,7 +75,7 @@ cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, s.git_word, s.git_file_extension FROM git_table t, git_search s " 
 select_search= select_search + "where s.id_gitsearch=t.id_gitsearch and t.dt_clone is not null and "
-select_search= select_search + " not exists (select 1 from git_stats_local gl where id_repo=t.id)  and ((cd_classe is null) or (cd_classe = 'ok')) limit 0,1;"
+select_search= select_search + " not exists (select 1 from git_stats_local gl where id_repo=t.id)  and ((cd_classe is null) or (cd_classe = 'ok')) limit 0,5;"
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
