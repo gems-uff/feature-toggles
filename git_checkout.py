@@ -163,8 +163,8 @@ for row in cursor._rows:
                         _lista_commit_p1 = getAuthorsBetween(git_parent,_split_commit_b1[0])
                         
                         _split_commit_p1 = _lista_commit_p1.split("\n")
-                        if len(_split_commit_p1) >= 2: # mais de 2 desenvolvedores
-                            print("Desenvolvedores 1:" + len(_split_commit_p1))
+                        print("Desenvolvedores 1:" + len(_split_commit_p1))
+                        if len(_split_commit_p1) >= 2: # mais de 2 desenvolvedores                            
                             _mais_dev_1 = True
                         
                         print("Merge: " + _commit + " Pai 2:" + _split_commit_parents[1])
@@ -173,8 +173,8 @@ for row in cursor._rows:
                         _lista_commit_p2 = getAuthorsBetween(git_parent,_split_commit_b2[0])
                         
                         _split_commit_p2 = _lista_commit_p2.split("\n")
-                        if len(_split_commit_p2) >= 2: # mais de 2 desenvolvedores
-                            print("Desenvolvedores 2:" + len(_split_commit_p2))
+                        print("Desenvolvedores 2:" + len(_split_commit_p2))
+                        if len(_split_commit_p2) >= 2: # mais de 2 desenvolvedores                            
                             _mais_dev_2 = True
 
                         if ((_mais_dev_1 == True) and (_mais_dev_2 == True)):
