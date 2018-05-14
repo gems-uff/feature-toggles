@@ -154,6 +154,8 @@ for row in cursor._rows:
                     _mais_dev_2 = False
 
                     if git_parent != "" and git_parent is not None:
+                        print("p1:" + _split_commit_parents[0])
+                        print("p2:" + _split_commit_parents[1])
                         _lista_commit_b1 = getCommitsBetween(git_parent,_split_commit_parents[0])
                         _lista_commit_b2 = getCommitsBetween(git_parent,_split_commit_parents[1])
 
