@@ -178,7 +178,7 @@ for row in cursor._rows:
                         print("Desenvolvedores 2:" + git_parent + " " + _split_commit_b2[0] + " " + _lista_dev_p2)
                         if len(_split_dev_p2) >= 2: # mais de 2 desenvolvedores                            
                             _mais_dev_2 = True
-                        exit()
+                        
                         if ((_mais_dev_1 == True) and (_mais_dev_2 == True)):
                             print("Merge Branch..............: " + str(_commit))
                             sql_insert_merge_branch = sql_insert_merge_branch + "(" + str(row[0].decode("utf-8")) +  ",6,now(),'" + str(_commit) + "',NULL),"
