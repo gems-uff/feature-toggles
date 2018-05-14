@@ -170,7 +170,7 @@ for row in cursor._rows:
                             _mais_dev_1 = True
                         
                         print("Merge: " + _commit + " Pai 2:" + _split_commit_parents[1])
-
+                        print(_lista_commit_b2)
                         _split_commit_b2 = _lista_commit_b2.split("\n")
                         _lista_dev_p2 = getAuthorsBetween(git_parent,_split_commit_b2[0])
                         
