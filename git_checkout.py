@@ -193,14 +193,16 @@ for row in cursor._rows:
             cursor.execute(insert_search)
             cnx.close()
         
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+        
+        if sql_insert_merge_branch != "":            
+            sql_insert_merge_branch = sql_insert_merge_branch[:len(sql_insert_merge_branch)-1]
+            
+            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
                             host=CONST.BD_HOST,
                             database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
-        cursor = cnx.cursor()
-
-        if sql_insert_merge_branch != "":
-            sql_insert_merge_branch = sql_insert_merge_branch[:len(sql_insert_merge_branch)-1]
-       	    insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert_merge_branch + ";"
+            cursor = cnx.cursor()
+       	    
+            insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert_merge_branch + ";"
             cursor.execute(insert_search)
             cnx.close()
 
