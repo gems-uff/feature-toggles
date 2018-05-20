@@ -10,6 +10,7 @@ class CONST(object):
     BD_DATABASE = "uff_bdd_dissertacao"
     REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
     username = 'edsumil'
+
     token="ed5bb3cc975f60c38$948e632284654a769bcf81e"
 
     def __setattr__(self, *_):
