@@ -19,11 +19,22 @@ CONST = CONST()
 def grep(grep_string, files):
     try:
         print(grep_string)
+        _grep_string = grep_string
+        if (chr(34) + " " + chr(34)) in _grep_string:
+            _aux = _grep_string.split(chr(34) + " " + chr(34))
+            _aux_grep_string = ""
+            for _w in _aux:
+                _aux_grep_string =  _aux_grep_string + " -e " + chr(34) + _w + chr(34) + " --or "
+            if _aux_grep_string != "":
+               _grep_string = " -E " +  _aux_grep_string[:-6]
+        else:
+            _grep_string =  " -E " + chr(34) + _grep_string + chr(34)
+        print(_grep_string)
         if files != "":
-            git_grep = subprocess.Popen(["git grep -E -i -q " + chr(34) + grep_string + chr(34) + " -- '" + files+"'"],
+            git_grep = subprocess.Popen(["git grep -i -q " + _grep_string + " -- '" + files+"'"],
                                shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         else:
-            git_grep = subprocess.Popen(["git grep -E -i -q " + chr(34) + grep_string + chr(34)],
+            git_grep = subprocess.Popen(["git grep -i -q " + chr(34) + _grep_string + chr(34)],
                                shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = git_grep.communicate()
         return git_grep.returncode
