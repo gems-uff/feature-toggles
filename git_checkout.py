@@ -28,7 +28,7 @@ def grep(grep_string, files):
             if _aux_grep_string != "":
                _grep_string = " -E " +  _aux_grep_string[:-6]
         else:
-            _grep_string =  " -E " + chr(34) + _grep_string + chr(34)
+            _grep_string =  "-E " + chr(34) + _grep_string + chr(34)
         print(_grep_string)
         if files != "":
             git_grep = subprocess.Popen(["git grep -i -q " + _grep_string + " -- '" + files+"'"],
@@ -86,7 +86,7 @@ cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, s.git_word, s.git_file_extension FROM git_table t, git_search s " 
 select_search= select_search + "where s.id_gitsearch=t.id_gitsearch and t.dt_clone is not null and "
-select_search= select_search + " not exists (select 1 from git_stats_local gl where id_repo=t.id)  and ((cd_classe is null) or (cd_classe = 'ok')) limit 0,50;"
+select_search= select_search + " not exists (select 1 from git_stats_local gl where id_repo=t.id and id_stats=1)  and ((cd_classe is null) or (cd_classe = 'ok')) limit 0,50;"
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
