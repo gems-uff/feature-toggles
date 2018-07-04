@@ -28,10 +28,10 @@ def grep(grep_string, files):
             if _aux_grep_string != "":
                _grep_string = " -E " +  _aux_grep_string[:-6]
         else:
-            _grep_string =  "-E " + chr(34) + _grep_string + chr(34)
+            _grep_string = chr(34) + _grep_string + chr(34)
         print(_grep_string)
         if files != "":
-            git_grep = subprocess.Popen(["git grep -i -q " + _grep_string + " -- '" + files+"'"],
+            git_grep = subprocess.Popen(["git grep -i -q -E " + _grep_string + " -- '" + files+"'"],
                                shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         else:
             git_grep = subprocess.Popen(["git grep -i -q " + chr(34) + _grep_string + chr(34)],

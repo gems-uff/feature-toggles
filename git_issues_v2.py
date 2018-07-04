@@ -2,6 +2,7 @@ import mysql.connector
 import  requests
 import time
 import datetime
+import sys
 
 class CONST(object):
     BD_USER = "bdd_dissertacao"
@@ -27,7 +28,7 @@ cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, t.full_name FROM git_table t " 
 select_search= select_search + "where  t.dt_clone is not null and "
-select_search= select_search + " exists (select 1 from git_issues gl where id_repo=t.id)  and ((t.cd_classe is null) or (t.cd_classe = 'ok')) limit 0,1;"
+select_search= select_search + " not exists (select 1 from git_issues gl where id_repo=t.id)  and ((t.cd_classe is null) or (t.cd_classe = 'ok')) limit 0,10;"
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
@@ -47,6 +48,8 @@ for row in cursor._rows:
         for _issues in data:
             if not _issues.get("message") is None:
                 print("erro limite:" + str(row[0].decode("utf-8")))
+                sys.exit()
+
             _id = _issues.get("id")
 
             sql_verify = "select 1 from git_issues where id=" + str(_id) + ";"
@@ -77,6 +80,11 @@ for row in cursor._rows:
                     _milestone_title = _milestone.get("title")
                     _milestone_number = str(_milestone.get("number"))
                     _milestone_id = _milestone.get("id")
+                
+                if not _issues.get("pull_request") is None:
+                    _issue_type = "PR"
+                else:
+                    _issue_type = "I"
 
                 sql_insert = sql_insert + ("(" + str(_id) + "," + str(row[0].decode("utf-8")) + "," +
                                             "'" + str(_number) + "'," +
@@ -89,7 +97,7 @@ for row in cursor._rows:
                                             "'" + _milestone_state + "'," +
                                             "'" + _milestone_title.replace(chr(39),"").replace("\\","").replace(chr(34),"") + "'," +
                                             "'" +_milestone_number + "'," +
-                                                    str(_milestone_id) + ", NOW()),")
+                                                    str(_milestone_id) + ", NOW(),'" & _issue_type + "'),")
 
                 _labels = _issues.get("labels")
 
@@ -114,7 +122,7 @@ for row in cursor._rows:
         cursor = cnx.cursor()
         sql_insert= ("insert into git_issues (id, id_repo, git_issue_number, git_issue_title, git_issue_body, git_issue_status, " +
                         "                       git_issues_close_date, git_issues_create_date,git_issues_update_date,git_issues_milestone_state, " +
-                        "                       git_issues_milestone_title,git_issues_milestone_number,git_issues_milestone_id,dt_operation) values " + sql_insert + ";")
+                        "                       git_issues_milestone_title,git_issues_milestone_number,git_issues_milestone_id,dt_operation,git_issues_type) values " + sql_insert + ";")
         #print(sql_insert)
         cursor.execute(sql_insert)
         cnx.close()
