@@ -1,3 +1,4 @@
+# coding=utf-8
 import mysql.connector
 import  requests
 import time
@@ -27,24 +28,25 @@ cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
 cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, t.full_name FROM git_table t " 
-select_search= select_search + "where  t.dt_clone is not null and "
-select_search= select_search + " not exists (select 1 from git_issues gl where id_repo=t.id)  and ((t.cd_classe is null) or (t.cd_classe = 'ok')) limit 0,10;"
+select_search= select_search + "where  t.dt_clone is not null and t.dt_issues is null and "
+select_search= select_search + " not exists (select 1 from git_issues gl where id_repo=t.id)  and ((t.cd_classe is null) or (t.cd_classe = 'ok')) limit 0,220; "
 cursor.execute(select_search)
 rs_git_search = cursor.fetchall()
 cnx.close()
 
 for row in cursor._rows:
     sql_insert=""
+    sql_insert_label=""
     
     sql_update_git_table = "update git_table set dt_issues=now() where id=" + str(row[0].decode("utf-8")) + ";"
-    for i in range(1,100):
+    for i in range(1,200):
         headers = {'Accept': 'application/vnd.github.cloak-preview', 'Authorization': 'token ' + CONST.token.replace("$","")}
         url = "https://api.github.com/repos/"+row[3].decode("utf-8")+"/issues?state=all&per_page=100&page=" + str(i)
         data = requests.get(url,headers=headers).json()
         
         if len(data) == 0:
             break
-
+        print(url);
         for _issues in data:
             if not _issues.get("message") is None:
                 print("erro limite:" + str(row[0].decode("utf-8")))
@@ -62,7 +64,7 @@ for row in cursor._rows:
             rs_git_issues = cursor_v.fetchall()
             cnx.close()
 
-            if cursor_v.rowcount == 0:
+            if cursor_v.rowcount >= 0:
                 _number = _issues.get("number")
                 _title = _issues.get("title")
                 _state = _issues.get("state")
@@ -81,7 +83,7 @@ for row in cursor._rows:
                     _milestone_number = str(_milestone.get("number"))
                     _milestone_id = _milestone.get("id")
                 
-                if not _issues.get("pull_request") is None:
+                if (not _issues.get("pull_request") is None) and (len(_issues.get("pull_request")) > 0):
                     _issue_type = "PR"
                 else:
                     _issue_type = "I"
@@ -97,11 +99,9 @@ for row in cursor._rows:
                                             "'" + _milestone_state + "'," +
                                             "'" + _milestone_title.replace(chr(39),"").replace("\\","").replace(chr(34),"") + "'," +
                                             "'" +_milestone_number + "'," +
-                                                    str(_milestone_id) + ", NOW(),'" & _issue_type + "'),")
+                                                    str(_milestone_id) + ", NOW(),'" + _issue_type + "'),")
 
                 _labels = _issues.get("labels")
-
-                sql_insert_label = ""
 
                 for _label in data:
                     _id_label = _label.get("id")
@@ -109,7 +109,7 @@ for row in cursor._rows:
                     _issues_label_description = "'" + _label.get("description").replace(chr(39)) + "'" if not _label.get("description") is None else "null"
                     
                     sql_insert_label = sql_insert_label + ("(" + str(_id_label) + "," + 
-                                                        str(row[0].decode("utf-8")) + "," +
+                                                        str(_id) + "," +
                                                         _issues_label_name + "," +
                                                         _issues_label_description + "),")
 
@@ -123,7 +123,6 @@ for row in cursor._rows:
         sql_insert= ("insert into git_issues (id, id_repo, git_issue_number, git_issue_title, git_issue_body, git_issue_status, " +
                         "                       git_issues_close_date, git_issues_create_date,git_issues_update_date,git_issues_milestone_state, " +
                         "                       git_issues_milestone_title,git_issues_milestone_number,git_issues_milestone_id,dt_operation,git_issues_type) values " + sql_insert + ";")
-        #print(sql_insert)
         cursor.execute(sql_insert)
         cnx.close()
 
@@ -160,7 +159,7 @@ for row in cursor._rows:
     sql_insert_event=""
 
     for row_issue in cursor_issues._rows:
-        for i in range(1,100):
+        for i in range(1,300):
             headers = {'Accept': 'application/vnd.github.cloak-preview', 'Authorization': 'token ' + CONST.token.replace("$","")}
             url = "https://api.github.com/repos/"+row[3].decode("utf-8")+"/issues/"+row_issue[2].decode("utf-8")+"/events?per_page=100&page=" + str(i)
             data_events = requests.get(url,headers=headers).json()
@@ -169,6 +168,9 @@ for row in cursor._rows:
                 break
 
             for _issues_events in data_events:
+                if not  _issues_events.get("message") is None:
+                    print("erro event:" +  _issues_events.get("message"))
+                    sys.exit()
                 _id_issue_event = _issues_events.get("id")
                 _cd_event = "'" + _issues_events.get("event") + "'" if not _issues_events.get("event") is None else "null"
                 _id_commit_event = "'" + _issues_events.get("commit_id") + "'" if not _issues_events.get("commit_id") is None else "null"
@@ -192,3 +194,4 @@ for row in cursor._rows:
                         sql_insert_event + ";")
         cursor.execute(sql_insert_event)
         cnx.close()
+print("Fim de execucao")
