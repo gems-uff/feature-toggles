@@ -64,7 +64,7 @@ for row in cursor._rows:
 
         cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
                                   host=CONST.BD_HOST,
-                                database=CONST.BD_DATABASE,connection_timeout=500,buffered=True)
+                                database=CONST.BD_DATABASE,multi=True,connection_timeout=500,buffered=True)
         cursor_v = cnx_commit.cursor()
         
         if sql_update != "":
