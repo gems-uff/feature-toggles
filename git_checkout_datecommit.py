@@ -3,6 +3,7 @@ import subprocess
 import mysql.connector
 import os
 import re
+import sys
 
 class CONST(object):
     BD_USER = "bdd_dissertacao"
