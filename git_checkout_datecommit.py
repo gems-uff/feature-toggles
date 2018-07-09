@@ -64,11 +64,11 @@ for row in cursor._rows:
 
         cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
                                   host=CONST.BD_HOST,
-                                database=CONST.BD_DATABASE,multi=True,connection_timeout=500,buffered=True)
+                                database=CONST.BD_DATABASE,connection_timeout=500,buffered=True)
         cursor_v = cnx_commit.cursor()
         
         if sql_update != "":
-            cursor_v.execute(sql_update)
+            cursor_v.execute(sql_update,multi=True)
 
         sql_update ="update git_table set updated_at=now() where id=" + str(row[0].decode("utf-8")) +";"
         cursor_v = cnx_commit.cursor()
