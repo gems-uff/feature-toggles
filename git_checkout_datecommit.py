@@ -42,6 +42,7 @@ cnx.close()
 repo_dir="//home//eduardosmil//featuretoggles//git_repositories//"
 #repo_dir="C:\\git_repositories\\"
 for row in cursor._rows:
+    sql_update = ""
     os.chdir(repo_dir + str(row[1].decode("utf-8")) + "_" + str(row[0].decode("utf-8")))
     print(repo_dir + str(row[1].decode("utf-8")) + "_" + str(row[0].decode("utf-8")))
     try:
@@ -55,20 +56,26 @@ for row in cursor._rows:
         sql_insert = ""
         ultimo_commit = ""
 
-        cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                                  host=CONST.BD_HOST,
-                                database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
-
         for _commit in _split_commit:
             if not _commit is None and len(_commit) > 0:
                 print(str(_commit))            
                 _split_item_commit = _commit.strip().split(";")
-                save_commit_date(str(row[0].decode("utf-8")), _split_item_commit[0], _split_item_commit[1],cnx_commit)
+                sql_update = sql_update + "update git_stats_local set stats_value_aux2='" + str(_split_item_commit[1]) + "' where id_repo='" + str(row[0].decode("utf-8")) + "'and stats_value='" + str(_split_item_commit[0]) + "' and id_stats=1;"
 
-        update ="update git_table set updated_at=now() where id=" + str(row[0].decode("utf-8")) +";"
+        cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                                  host=CONST.BD_HOST,
+                                database=CONST.BD_DATABASE,connection_timeout=500,buffered=True)
         cursor_v = cnx_commit.cursor()
-        cursor_v.execute(update)
+        
+        if sql_update != "":
+            cursor_v.execute(sql_update)
+
+        sql_update ="update git_table set updated_at=now() where id=" + str(row[0].decode("utf-8")) +";"
+        cursor_v = cnx_commit.cursor()
+        cursor_v.execute(sql_update)
         cnx_commit.close()
+
+        sys.exit()
     except subprocess.CalledProcessError as e:
         print(e.output)
 
