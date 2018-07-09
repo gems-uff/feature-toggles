@@ -54,9 +54,7 @@ for row in cursor._rows:
         stdout = stdout.decode("utf-8")
 
         _split_commit = stdout.split("\n")
-        sql_insert = ""
-        ultimo_commit = ""
-
+        
         for _commit in _split_commit:
             if not _commit is None and len(_commit) > 0:
                 print(str(_commit))            
@@ -76,7 +74,6 @@ for row in cursor._rows:
         cursor_v.execute(sql_update)
         cnx_commit.close()
 
-        sys.exit()
     except subprocess.CalledProcessError as e:
         print(e.output)
 
