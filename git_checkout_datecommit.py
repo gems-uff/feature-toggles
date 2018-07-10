@@ -54,20 +54,45 @@ for row in cursor._rows:
         stdout = stdout.decode("utf-8")
 
         _split_commit = stdout.split("\n")
-        
-        for _commit in _split_commit:
-            if not _commit is None and len(_commit) > 0:
-                print(str(_commit))            
-                _split_item_commit = _commit.strip().split(";")
-                sql_update = sql_update + "update git_stats_local set stats_value_aux2='" + str(_split_item_commit[1]) + "' where id_repo='" + str(row[0].decode("utf-8")) + "'and stats_value='" + str(_split_item_commit[0]) + "' and id_stats=1;"
 
-        cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                                  host=CONST.BD_HOST,
-                                database=CONST.BD_DATABASE,connection_timeout=500,buffered=True)
-        cursor_v = cnx_commit.cursor()
+        contador = 0
+        contador_total = len(_split_commit)
+        contador_aux = 0
+
+        while contador <= contador_total:
+            i = 0
+            for _commit in _split_commit:
+                if not _commit is None and len(_commit) > 0 and i >= contador_aux:
+                    print(str(_commit))            
+                    _split_item_commit = _commit.strip().split(";")
+                    sql_update = sql_update + "update git_stats_local set stats_value_aux2='" + str(_split_item_commit[1]) + "' where id_repo='" + str(row[0].decode("utf-8")) + "'and stats_value='" + str(_split_item_commit[0]) + "' and id_stats=1;"
+    
+                    if contador >= contador_aux+2000:
+                       contador_aux = contador
+                       break
+
+                    contador = contador + 1
+                    i = i + 1
+                else:
+                    i = i + 1
+
+            cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                                      host=CONST.BD_HOST,
+                                    database=CONST.BD_DATABASE,connection_timeout=500,buffered=True)
+            cursor_v = cnx_commit.cursor()
         
-        if sql_update != "":
-            cursor_v.execute(sql_update,multi=True)
+            if sql_update != "":
+                results=cursor_v.execute(sql_update,multi=True)
+                for cur in results:
+                    if cur.with_rows:
+                        print('result:', cur.fetchall())
+                cnx_commit.commit()
+                sql_update = ""
+
+        if not cnx_commit.is_connected():
+           cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
+                                host=CONST.BD_HOST,
+                                database=CONST.BD_DATABASE,connection_timeout=500,buffered=True)
 
         sql_update ="update git_table set updated_at=now() where id=" + str(row[0].decode("utf-8")) +";"
         cursor_v = cnx_commit.cursor()
