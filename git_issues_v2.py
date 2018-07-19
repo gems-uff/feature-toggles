@@ -103,13 +103,14 @@ for row in cursor._rows:
 
                 _labels = _issues.get("labels")
 
-                for _label in data:
+                for _label in labels:
                     _id_label = _label.get("id")
                     _issues_label_name = "'" + _label.get("name").replace(chr(39)) + "'" if not _label.get("name") is None else "null"
                     _issues_label_description = "'" + _label.get("description").replace(chr(39)) + "'" if not _label.get("description") is None else "null"
                     
                     sql_insert_label = sql_insert_label + ("(" + str(_id_label) + "," + 
-                                                        str(_id) + "," +
+                                                        str(_id) + "," +                                                
+                                                        str(row[0].decode("utf-8")) + "," +
                                                         _issues_label_name + "," +
                                                         _issues_label_description + "),")
 
@@ -134,7 +135,7 @@ for row in cursor._rows:
                               database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
             
-            sql_insert_label= ("insert into git_issues_label (id,id_issue,git_issues_label_name,git_issues_label_description) values  " +
+            sql_insert_label= ("insert into git_issues_label (id,id_issue,id_repo, git_issues_label_name,git_issues_label_description) values  " +
                             sql_insert_label + ";")
             cursor.execute(sql_insert_label)
             cnx.close()
