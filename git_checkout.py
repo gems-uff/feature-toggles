@@ -19,16 +19,10 @@ CONST = CONST()
 def grep(grep_string, files):
     try:
         print(grep_string)
-        _grep_string = grep_string
-        if (chr(34) + " " + chr(34)) in _grep_string:
-            _aux = _grep_string.split(chr(34) + " " + chr(34))
-            _aux_grep_string = ""
-            for _w in _aux:
-                _aux_grep_string =  _aux_grep_string + " -e " + chr(34) + _w + chr(34) + " --or "
-            if _aux_grep_string != "":
-               _grep_string = " -E " +  _aux_grep_string[:-6]
-        else:
-            _grep_string = chr(34) + _grep_string + chr(34)
+        
+        _grep_string = grep_string.replace(" ","(.*?)")
+        _grep_string = chr(34) + _grep_string + chr(34)
+
         print(_grep_string)
         if files != "":
             git_grep = subprocess.Popen(["git grep -i -q -E " + _grep_string + " -- '" + files+"'"],
