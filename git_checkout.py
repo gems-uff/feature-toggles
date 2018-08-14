@@ -3,6 +3,7 @@ import subprocess
 import mysql.connector
 import os
 import re
+import sys
 
 class CONST(object):
     BD_USER = "bdd_dissertacao"
@@ -24,8 +25,8 @@ def grep(grep_string, files):
         _grep_string = chr(34) + _grep_string + chr(34)
 
         print(_grep_string)
-        if files != "":
-            git_grep = subprocess.Popen(["git grep -i -q -E " + _grep_string + " -- '" + files+"'"],
+        if files != "":            
+            git_grep = subprocess.Popen(["git grep -i -q -E " + _grep_string  + " -- '" + files+"'"],
                                shell = True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
         else:
             git_grep = subprocess.Popen(["git grep -i -q " + chr(34) + _grep_string + chr(34)],
@@ -133,7 +134,7 @@ for row in cursor._rows:
             insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"
             cursor.execute(insert_search)
             cnx.close()   
-	
+
         lista_commit = subprocess.check_output([" git rev-list --min-parents=2 " +  ultimo_commit],stderr=subprocess.STDOUT,shell=True)
         lista_commit = lista_commit.decode("utf-8")
 
