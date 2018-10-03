@@ -1,0 +1,46 @@
+library(readxl)
+CRQ32 <- read_excel("C:/Users/EduardoSmil/OneDrive/Documentos/uff/dissertacao/git/feature-toggles/Excel/CRQ3_2.xlsx")
+View(CRQ32)
+layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
+par(cex.axis=1.5)
+boxplot(CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS,CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS, names = c("Before FT","After FT"), horizontal = TRUE, ylim=c(0,300),boxwex=.8, cex=1.5)
+par(cex.lab=1.5)
+title(xlab="Days needed / 100 Commits")
+text(boxplot.stats(CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS)$stats, labels = format(round(boxplot.stats(CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS)$stats,0),nsmall = 0), y = 0.5, cex=1.5)
+text(boxplot.stats(CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS)$stats, labels = format(round(boxplot.stats(CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS)$stats,0),nsmall = 0), y = 1.5, cex=1.5)
+x <- list(CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS, CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS)
+stripchart(x,pch=1,cex=1.5,xlim=c(300,950),  method="stack")
+
+shapiro.test(CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS)
+
+	Shapiro-Wilk normality test
+
+data:  CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS
+W = 0.43202, p-value = 4.234e-15
+
+shapiro.test(CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS)
+
+	Shapiro-Wilk normality test
+
+data:  CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS
+W = 0.23378, p-value < 2.2e-16
+
+wilcox.test(CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS, CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS, paired = TRUE)
+
+	Wilcoxon signed rank test with continuity correction
+
+data:  CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS and CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS
+V = 1370, p-value = 0.2299
+alternative hypothesis: true location shift is not equal to 0
+
+library("effsize", lib.loc="~/R/win-library/3.4")
+Warning message:
+package ‘effsize’ was built under R version 3.4.4 
+cliff.delta(CRQ32$TEMPO_MEDIO_ISSUES_S_FW_100_COMMITS,CRQ32$TEMPO_MEDIO_ISSUES_C_FW_100_COMMITS)
+
+Cliff's Delta
+
+delta estimate: 0.2715731 (small)
+95 percent confidence interval:
+       inf        sup 
+0.07833725 0.44514151 

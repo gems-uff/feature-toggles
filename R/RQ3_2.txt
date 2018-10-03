@@ -1,0 +1,48 @@
+library(readxl)
+CRQ32 <- read_excel("C:/Users/EduardoSmil/OneDrive/Documentos/uff/dissertacao/git/feature-toggles/Excel/CRQ3_2.xlsx")
+View(CRQ32)
+layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
+par(cex.axis=1.5)
+boxplot(CRQ32$TEMPO_MEDIO_ISSUES_S_FW,CRQ32$TEMPO_MEDIO_ISSUES_C_FW, names = c("Before FT","After FT"), horizontal = TRUE, ylim=c(0,40),boxwex=.8, cex=1.5)
+par(cex.lab=1.5)
+title(xlab="Days needed / Bug")
+text(boxplot.stats(CRQ32$TEMPO_MEDIO_ISSUES_S_FW)$stats, labels = format(round(boxplot.stats(CRQ32$TEMPO_MEDIO_ISSUES_S_FW)$stats,0),nsmall = 0), y = 0.5, cex=1.5)
+text(boxplot.stats(CRQ32$TEMPO_MEDIO_ISSUES_C_FW)$stats, labels = format(round(boxplot.stats(CRQ32$TEMPO_MEDIO_ISSUES_C_FW)$stats,0),nsmall = 0), y = 1.5, cex=1.5)
+x <- list(CRQ32$TEMPO_MEDIO_ISSUES_S_FW, CRQ32$TEMPO_MEDIO_ISSUES_C_FW)
+stripchart(x,pch=1,cex=1.5,xlim=c(40,60),  method="stack")
+
+> shapiro.test(CRQ32$TEMPO_MEDIO_ISSUES_S_FW)
+
+	Shapiro-Wilk normality test
+
+data:  CRQ32$TEMPO_MEDIO_ISSUES_S_FW
+W = 0.18257, p-value < 2.2e-16
+
+
+
+> shapiro.test(CRQ32$TEMPO_MEDIO_ISSUES_C_FW)
+
+	Shapiro-Wilk normality test
+
+data:  CRQ32$TEMPO_MEDIO_ISSUES_C_FW
+W = 0.54278, p-value = 1.57e-13
+
+> wilcox.test(CRQ32$TEMPO_MEDIO_ISSUES_S_FW,CRQ32$TEMPO_MEDIO_ISSUES_C_FW,paired = TRUE)
+
+	Wilcoxon signed rank test with continuity correction
+
+data:  CRQ32$TEMPO_MEDIO_ISSUES_S_FW and CRQ32$TEMPO_MEDIO_ISSUES_C_FW
+V = 1339, p-value = 0.3119
+alternative hypothesis: true location shift is not equal to 0
+
+> library("effsize", lib.loc="~/R/win-library/3.4")
+Warning message:
+package ‘effsize’ was built under R version 3.4.4 
+> cliff.delta(CRQ32$TEMPO_MEDIO_ISSUES_S_FW,CRQ32$TEMPO_MEDIO_ISSUES_C_FW)
+
+Cliff's Delta
+
+delta estimate: 0.2715731 (small)
+95 percent confidence interval:
+       inf        sup 
+0.07833725 0.44514151 
