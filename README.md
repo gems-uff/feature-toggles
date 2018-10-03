@@ -18,35 +18,35 @@ Guide
 
 Corpus Compose for each research question:
 	
-	The totally of the projects is listed on the "resumo" spreadsheet (git.xlsx). This spreadsheet concentrates all data needed to perform all research question's analysis. 
+	The totally of the projects is listed on the "resumo" spreadsheet (git.xlsx). This spreadsheet concentrates all data needed to perform all the research question's analysis. 
 
 	1) Research Question 1:
 	 
-		The git.xlsx ("resumo" spreadsheet) represents the result of the queries, on github, for projects that adopted feature toggles.
+		The git.xlsx ("resumo" spreadsheet) represents the result of the queries, on Github, for projects that adopted feature toggles.
 	
 	2) Research Question 2:
 		
-		The filter_RQ_2.xlsx represents the totally of projects that shows at least one merge commit.
+		The filter_RQ_2.xlsx represents the totally of projects that show at least one merge commit.
 	
 	3) Research Question 3:
 		
-		The filter_RQ_3.xlsx represents the totally of projects that shows at least one issue or pull request representing a bug.
+		The filter_RQ_3.xlsx represents the totally of projects that show at least one issue or pull request representing a bug.
 		
 Corpus Filter:
 
 	1) Research Question 1:
 	
-		No futher action to applly a filter.
+		No further action to apply a filter.
 	
 	2) Research Question 2:
 	
-		To calculate de the thrshold, we ran the R script on filter_RQ2.txt.
+		To calculate de the threshold, we ran the R script on filter_RQ2.txt.
 		Based on filter_RQ_2, we applied a filter with 82 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw).
 		The result of this selection is CRQ2.xlsx.
 	
 	3) Research Question 3:
 	
-		To calculate de the thrshold, we ran the R script on filter_RQ3.txt.
+		To calculate de the threshold, we ran the R script on filter_RQ3.txt.
 		Based on filter_RQ_3, we applied a filter with 132 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw).
 		The result of this selection is CRQ3.xlsx.
 
