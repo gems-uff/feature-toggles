@@ -1,5 +1,5 @@
 library(readxl)
-CRQ32 <- read_excel("C:/Users/EduardoSmil/OneDrive/Documentos/uff/dissertacao/git/feature-toggles/Excel/CRQ3_2.xlsx")
+CRQ32 <- read_excel("feature-toggles/Excel/CRQ3_2.xlsx")
 View(CRQ32)
 layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
 par(cex.axis=1.5)

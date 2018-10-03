@@ -1,5 +1,5 @@
 library(readxl)
-CRQ2 <- read_excel("C:/Users/EduardoSmil/OneDrive/Documentos/uff/dissertacao/git/feature-toggles/Excel/CRQ2.xlsx")
+CRQ2 <- read_excel("feature-toggles/Excel/CRQ2.xlsx")
 View(CRQ2)
 boxplot(CRQ2$`NUM_MERGES_100 COMMITS_SEM_FW`,CRQ2$`NUM_MERGES_100 COMMITS_COM_FW`, names = c("Before FT","After FT"), horizontal = TRUE,  cex=1.5)
 par(cex.lab=1.5)

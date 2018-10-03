@@ -1,3 +1,6 @@
+library(readxl)
+CRQ2 <- read_excel("feature-toggles/Excel/CRQ2.xlsx")
+View(CRQ2)
 par(mfrow=c(3,2), mar=c(3, 3, 0.8, 0.8), mgp = c(1, 0, 0), tck = -0.01, oma=c(0, 0, 1, 0), tcl = -0.01, lheight=2)
 par(cex.lab=1.5)
 par(cex.axis=1.0)
