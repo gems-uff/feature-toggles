@@ -1,10 +1,10 @@
 library(readxl)
 CRQ2 <- read_excel("Dataset/CRQ2.xlsx")
 View(CRQ2)
-boxplot(CRQ2$`NUM_MERGES_100 COMMITS_SEM_FW`,CRQ2$`NUM_MERGES_100 COMMITS_COM_FW`, names = c("Before FT","After FT"), horizontal = TRUE)
+boxplot(CRQ2$`NUM_MERGES_100 COMMITS_COM_FW`,CRQ2$`NUM_MERGES_100 COMMITS_SEM_FW`, names = c("After FT","Before FT"), horizontal = TRUE)
 title(xlab="Merge / 100 Commits")
-text(boxplot.stats(CRQ2$`NUM_MERGES_100 COMMITS_SEM_FW`)$stats, labels = format(round(boxplot.stats(CRQ2$`NUM_MERGES_100 COMMITS_SEM_FW`)$stats,0),nsmall = 0), y = 0.5, cex=1.5)
-text(boxplot.stats(CRQ2$`NUM_MERGES_100 COMMITS_COM_FW`)$stats, labels = format(round(boxplot.stats(CRQ2$`NUM_MERGES_100 COMMITS_COM_FW`)$stats,0),nsmall = 0), y = 1.5, cex=1.5)
+text(boxplot.stats(CRQ2$`NUM_MERGES_100 COMMITS_COM_FW`)$stats, labels = format(round(boxplot.stats(CRQ2$`NUM_MERGES_100 COMMITS_COM_FW`)$stats,0),nsmall = 0), y = 0.5)
+text(boxplot.stats(CRQ2$`NUM_MERGES_100 COMMITS_SEM_FW`)$stats, labels = format(round(boxplot.stats(CRQ2$`NUM_MERGES_100 COMMITS_SEM_FW`)$stats,0),nsmall = 0), y = 1.5)
 
 summary(CRQ2$`NUM_MERGES_100 COMMITS_SEM_FW`)
 
