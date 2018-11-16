@@ -1,0 +1,27 @@
+library(readxl)
+DEV_100_COMMITS <- read_excel("Dataset/DEV_100_COMMITS.xlsx")
+View(DEV_100_COMMITS)
+layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
+par(cex.axis=1.5)
+boxplot(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW,DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW, names = c("Depois de FT","Antes de FT"), horizontal = TRUE, ylim=c(0,10), boxwex = 0.75, cex=1.5)
+par(cex.lab=1.5)
+title(xlab="(Merge / 100 Commits) por Desenvolvedor")
+text(boxplot.stats(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW)$stats, labels = format(round(boxplot.stats(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW)$stats,2),nsmall = 0), y = 0.5, cex=1.5)
+text(boxplot.stats(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW)$stats, labels = format(round(boxplot.stats(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW)$stats,2),nsmall = 0), y = 1.5, cex=1.5)
+x <- list(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW[DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW>=12],DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW[DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW>=12])
+stripchart(x,pch=1,cex=1.5,xlim=c(12,40))
+
+summary(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW)
+
+summary(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW)
+
+shapiro.test(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW)
+
+shapiro.test(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW)
+
+wilcox.test(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW,DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW, paired = TRUE)
+
+
+library("effsize", lib.loc="~/R/win-library/3.4")
+
+cliff.delta(DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_SEM_FW,DEV_100_COMMITS$MERGE_100_COMMITS_POR_DEV_COM_FW,return.dm = FALSE)
