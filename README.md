@@ -5,6 +5,8 @@ features (functionalities) in the code with if statements to gain more control o
 By surrounding a feature with a toggle (if statement), developers can decide when and for whom 
 the feature should be available. 
 
+This repository contains all data used for the research described in the paper.
+
 Paper
 =======
 How the adoption of feature toggles may affect the branching merge process and bugs in open-source projects?
