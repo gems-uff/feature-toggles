@@ -1,22 +1,17 @@
-Feature Toggles
-=======
-Feature Toggles (also known as Feature Flags, Feature Flippers, or Feature Switches) consist on surrounding 
-features (functionalities) in the code with if statements to gain more control over their release process. 
-By surrounding a feature with a toggle (if statement), developers can decide when and for whom 
-the feature should be available. 
+Overview
+========
 
-This repository contains all data used for the research described in the paper.
+Feature Toggles (also known as Feature Flags, Feature Flippers, or Feature Switches) consist on surrounding features (functionalities) in the code with if statements to gain more control over their release process. By surrounding a feature with a toggle (if statement), developers can decide when and for whom the feature should be available. 
 
-Paper
-=======
-How the adoption of feature toggles may affect the branching merge process and bugs in open-source projects?
+This repository contains all data used for the research described in the paper "How the adoption of feature toggles affects branch merges and defects in open-source projects?"
 
 Content
 =======
-Spreadsheets and R Scripts that were used to perform the all the analysis of this paper.
+
+Spreadsheets and R Scripts that were used to perform the all the analyses in the paper.
 
 Guide
-=======
+=====
 
 Corpus Compose for each research question:
 	
