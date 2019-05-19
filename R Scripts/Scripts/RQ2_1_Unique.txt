@@ -1,0 +1,26 @@
+library(readxl)
+CRQ2_1_git_v_unique <- read_excel("Dataset/CRQ2_1_UNIQUE.xlsx")
+View(CRQ2_1_git_v_unique)
+par(cex.axis=0.75)
+boxplot(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WITH_FT`,CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WO_FT`, names = c("After FT","Before FT"), horizontal = TRUE, boxwex = 0.75)
+par(cex.lab=0.75)
+title(xlab="Merge / 100 Commits")
+text(boxplot.stats(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WITH_FT`)$stats, labels = format(round(boxplot.stats(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WITH_FT`)$stats,0),nsmall = 0), y = 0.5, cex=0.75)
+text(boxplot.stats(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WO_FT`)$stats, labels = format(round(boxplot.stats(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WO_FT`)$stats,0),nsmall = 0), y = 1.5, cex=0.75)
+
+summary(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WO_FT`)
+
+summary(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WITH_FT`)
+
+shapiro.test(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WO_FT`)
+
+
+shapiro.test(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WITH_FT`)
+
+
+wilcox.test(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WO_FT`,CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WITH_FT`, paired = TRUE)
+
+
+library("effsize", lib.loc="~/R/win-library/3.4")
+
+cliff.delta(CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WO_FT`,CRQ2_1_git_v_unique$`NUM_MERGES_PER_100_COMMITS_WITH_FT`,return.dm = FALSE)
