@@ -10,73 +10,49 @@ Content
 
 Spreadsheets and R Scripts that were used to perform the all the analyses in the paper.
 
-Guide
-=====
+Datasets
+========
 
-Corpus Compose for each research question:
-	
-	The totally of the projects is listed on the "resumo" spreadsheet (git.xlsx). This spreadsheet concentrates all data needed to perform all the research question's analysis. 
+We list in the following the datasets used to answer each one of the research questions:
 
-	1) Research Question 1:
-	 
-		The git.xlsx ("resumo" spreadsheet) represents the result of the queries, on Github, for projects that adopted feature toggles.
-	
-	2) Research Question 2:
-		
-		The filter_RQ_2.xlsx represents the totally of projects that show at least one merge commit.
-	
-	3) Research Question 3:
-		
-		The filter_RQ_3.xlsx represents the totally of projects that show at least one issue or pull request representing a bug.
-		
-Corpus Filter:
+- [RQ1: Characterization (n=949)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/C_cleaned.xlsx)
+- [RQ2.1: Normalized number of merges (n=158)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_1.xlsx)
+- [RQ2.2: Effort per merge (n=133)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_2.xlsx)
+- [RQ2.3: Normalized merge effort (n=158)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_3.xlsx)
+- [RQ3.1: Normalized number of defects (n=79)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_1.xlsx)
+- [RQ3.2: Time to fix a defect (n=50)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_2.xlsx)
+- [RQ3.3: Normalized time fixing defects (n=79)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_3.xlsx)
 
-	1) Research Question 1:
-	
-		No further action to apply a filter.
-	
-	2) Research Question 2:
-	
-		To calculate de the threshold, we ran the R script on filter_RQ2.txt.
-		Based on filter_RQ_2, we applied a filter with 82 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw).
-		The result of this selection is CRQ2.xlsx.
-	
-	3) Research Question 3:
-	
-		To calculate de the threshold, we ran the R script on filter_RQ3.txt.
-		Based on filter_RQ_3, we applied a filter with 132 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw).
-		The result of this selection is CRQ3.xlsx.
+We also replicated our experiment over a more selective and uniform corpus (n=43), to better allow triangularization of the results:
 
-Research Question's Analysis:
+- [RQ2.1: Normalized number of merges (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_1_UNIQUE.xlsx)
+- [RQ2.2: Effort per merge (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_2_UNIQUE.xlsx)
+- [RQ2.3: Normalized merge effort (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_3_UNIQUE.xlsx)
+- [RQ3.1: Normalized number of defects (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_1_UNIQUE.xlsx)
+- [RQ3.2: Time to fix a defect (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_2_UNIQUE.xlsx)
+- [RQ3.3: Normalized time fixing defects (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_3_UNIQUE.xlsx)
 
-	1) Research Question 1:
-	
-		The analysis of the average moment of adoption for each programming language are described on dispersao.xlsx
+Detailed Reproducibility Instructions
+=====================================
+
+Base corpus for each research question:
+
+- RQ1: [C<sub>Cleaned</sub>](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/C_cleaned.xlsx) contains the result of the queries, on Github, for projects that adopted feature toggles.
+- RQ2: [C<sub>Merge</sub>](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CMERGE.xlsx) contains the projects with at least one merge commit.
+- RQ3: [C<sub>Defects</sub>](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CBUG.xlsx): contains the projects with at least one issue or pull request representing a defect.
 		
-	2) Research Question 2:
-		
-		a) RQ 2.1:			
-			To obtain the results of the analysis RQ 2.1, we ran in R Studio, described on RQ2_1.txt;
-			Scatter plot script is described on RQ_2_1_scatter_plot.txt;
-			To perform the analysis for each programming language, we ran in R Studio, the RQ2_1_PROGLAN.txt.
-		
-		b) RQ 2.2:						
-			On analysis over the RQ 2.2 e 2.3, we created a new corpus, derived of CRQ2.xlsx, with only projects with at least one merge commit.
-			To obtain the results of the analysis RQ 2.2, we ran in R Studio, described on RQ2_2.txt;
-		
-		c) RQ 2.3:									
-			To obtain the results of the analysis RQ 2.3, we ran in R Studio, described on RQ2_3.txt;
-	
-	3) Research Question 3:
-	
-		a) RQ 3.1:			
-			To obtain the results of the analysis RQ 3.1, we ran in R Studio, described on RQ3_1.txt;						
-		
-		b) RQ 3.2:						
-			On analysis over the RQ 3.2 e 3.3, we created a new corpus, derived of CRQ3.xlsx, with only projects with at least one bug issues or pull request.
-			To obtain the results of the analysis RQ 3.2, we ran in R Studio, described on RQ3_2.txt;		
-		
-		c) RQ 3.3:									
-			To obtain the results of the analysis RQ 3.3, we ran in R Studio, described on RQ3_3.txt;
-	
-	
+Corpus Filtering:
+
+- RQ1: No further actions are needed.
+- RQ2: To calculate de the threshold, we ran the [filter_RQ2.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/filter_RQ2.txt) R script. Based on the results, we applied a filter requiring 82 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw), over the corpus of RQ1 and produced the corpus for RQ2.
+- RQ3: To calculate de the threshold, we ran the [filter_RQ3.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/filter_RQ3.txt) R script. Based on the results, we applied a filter requiring 132 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw), over the corpus of RQ1 and produced the corpus for RQ3.
+
+Research Questions' Analyses:
+
+- RQ1: The analysis of the average moment of adoption for each programming language are described on dispersao.xlsx
+- RQ2.1: To obtain the results of the analysis for this research question, run [RQ2_1.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/RQ2_1.txt) in R. The scatter plot is generated by [RQ_2_1_scatter_plot.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/RQ_2_1_scatter_plot.txt). The programming languages analysis is generated by [RQ2_1_PROGLAN.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/RQ2_1_PROGLAN.txt).
+- RQ2.2: To obtain the results of the analysis for this research question, run [RQ2_2.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/RQ2_2.txt) in R.
+- RQ2.3: To obtain the results of the analysis for this research question, run [RQ2_3.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/RQ2_3.txt) in R.
+- RQ3.1: To obtain the results of the analysis for this research question, run [RQ3_1.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/RQ3_1.txt) in R.
+- RQ3.2: To obtain the results of the analysis for this research question, run [RQ3_2.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/RQ3_2.txt) in R.
+- RQ3.3: To obtain the results of the analysis for this research question, run [RQ3_3.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/RQ3_3.txt) in R.
