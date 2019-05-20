@@ -10,6 +10,28 @@ Content
 
 Spreadsheets and R Scripts that were used to perform the all the analyses in the paper.
 
+Datasets
+========
+
+We list in the following the datasets used to answer each one of the research questions:
+
+- [RQ1: Characterization (n=949)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/C_cleaned.xlsx)
+- [RQ2.1: Normalized number of merges (n=158)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_1.xlsx)
+- [RQ2.2: Effort per merge (n=133)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_2.xlsx)
+- [RQ2.3: Normalized merge effort (n=158)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_3.xlsx)
+- [RQ3.1: Normalized number of defects (n=79)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_1.xlsx)
+- [RQ3.2: Time to fix a defect (n=50)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_2.xlsx)
+- [RQ3.3: Normalized time fixing defects (n=79)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_3.xlsx)
+
+We also replicated our experiment over a more selective and uniform corpus (n=43), to better allow triangularization of the results:
+
+- [RQ2.1: Normalized number of merges (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_1_UNIQUE.xlsx)
+- [RQ2.2: Effort per merge (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_2_UNIQUE.xlsx)
+- [RQ2.3: Normalized merge effort (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_3_UNIQUE.xlsx)
+- [RQ3.1: Normalized number of defects (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_1_UNIQUE.xlsx)
+- [RQ3.2: Time to fix a defect (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_2_UNIQUE.xlsx)
+- [RQ3.3: Normalized time fixing defects (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_3_UNIQUE.xlsx)
+
 Guide
 =====
 
