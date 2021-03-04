@@ -1,4 +1,4 @@
-﻿library(readxl)
+library(readxl)
 CRQ2_2 <- read_excel("Dataset/CRQ2_2.xlsx")
 View(CRQ2_2)
 layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
@@ -17,7 +17,7 @@ shapiro.test(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`)
 
 wilcox.test(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`,CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`, paired = TRUE)
 
-library("effsize", lib.loc="~/R/win-library/3.4")
+library("effsize")
 
 
 cliff.delta(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`,CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`,return.dm = FALSE)

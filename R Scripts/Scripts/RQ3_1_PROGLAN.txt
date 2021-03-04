@@ -1,0 +1,89 @@
+library(readxl)
+library(effsize)
+CRQ3 <- read_excel("Dataset/CRQ3_1.xlsx")
+View(CRQ3)
+par(mfrow=c(3,2), mar=c(3, 3, 1.8, 1.8), mgp = c(1, 0, 0), tck = -0.01, oma=c(0, 0, 1, 0), tcl = -0.01, lheight=2)
+par(cex.lab=1.5)
+par(cex.axis=1.3)
+
+
+summary(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`)
+
+summary(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`)
+
+shapiro.test(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`)
+
+
+shapiro.test(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`)
+
+
+with(CRQ3, tapply(ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT, Linguagem, shapiro.test))
+with(CRQ3, tapply(ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT, Linguagem, shapiro.test))
+
+
+
+boxplot(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="C#"], CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="C#"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="C#", cex=1.5)
+
+test <- wilcox.test(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="C#"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="C#"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ3$Linguagem=="C#")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="C#"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="C#"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+
+boxplot(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Java"], CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Java"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="Java", cex=1.5)
+test <- wilcox.test(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Java"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Java"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ3$Linguagem=="Java")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Java"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Java"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+
+boxplot(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="JavaScript"], CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="JavaScript"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="JavaScript", cex=1.5)
+test <- wilcox.test(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="JavaScript"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="JavaScript"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ3$Linguagem=="JavaScript")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="JavaScript"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="JavaScript"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+boxplot(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="PHP"], CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="PHP"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="PHP", cex=1.5)
+test <- wilcox.test(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="PHP"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="PHP"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ3$Linguagem=="PHP")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="PHP"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="PHP"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+boxplot(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Python"], CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Python"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="Python", cex=1.5)
+test <- wilcox.test(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Python"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Python"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ3$Linguagem=="Python")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Python"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Python"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+boxplot(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Ruby"], CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Ruby"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="Ruby", cex=1.5)
+test <- wilcox.test(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Ruby"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Ruby"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ3$Linguagem=="Ruby")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`[CRQ3$Linguagem=="Ruby"],CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`[CRQ3$Linguagem=="Ruby"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+summary(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WO_FT`)
+summary(CRQ3$`ISSUES_PER_K_LOC_IN_100_COMMITS_WITH_FT`)
