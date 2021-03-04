@@ -4,18 +4,7 @@ import mysql.connector
 import os
 import re
 import sys
-
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-    REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
+import configs as cf
 
 def grep(grep_string, files):
     try:
@@ -39,9 +28,9 @@ def grep(grep_string, files):
 
 
 
-cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= "select distinct l.id_repo, t.name,s.git_word,s.git_file_extension "
@@ -79,9 +68,9 @@ for row in cursor._rows:
     try:
         subprocess.check_output(["git checkout -f master"],stderr=subprocess.STDOUT,shell=True)
 		
-		cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+		cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 		cursor_commit = cnx.cursor()
 		
 		select_search= "select l.status_value "
@@ -115,9 +104,9 @@ for row in cursor._rows:
                 
                 sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",15,now(),'" + str(_commit) + "'," + str(lista_linhas) + "),"
 	 
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
         cursor = cnx.cursor()
         if sql_insert != "":
             sql_insert = sql_insert[:len(sql_insert)-1]

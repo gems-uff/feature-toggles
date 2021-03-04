@@ -4,24 +4,13 @@ import mysql.connector
 import os
 import re
 import sys
-
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-    REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
+import configs as cf
 
 def save_commit_date(id_repo, commit, date, cnx_commit):
     if not cnx_commit.is_connected():
-        cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                                  host=CONST.BD_HOST,
-                                database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cnx_commit = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                                  host=cf.db_host,
+                                database=cf.db_name,connection_timeout=300,buffered=True)
                             
     cursor_v = cnx_commit.cursor()
 
@@ -29,9 +18,9 @@ def save_commit_date(id_repo, commit, date, cnx_commit):
     cursor_v.execute(update)
         
 
-cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, s.git_word, s.git_file_extension FROM git_table t, git_search s " 
@@ -76,9 +65,9 @@ for row in cursor._rows:
                 else:
                     i = i + 1
 
-            cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                                      host=CONST.BD_HOST,
-                                    database=CONST.BD_DATABASE,connection_timeout=500,buffered=True)
+            cnx_commit = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                                      host=cf.db_host,
+                                    database=cf.db_name,connection_timeout=500,buffered=True)
             cursor_v = cnx_commit.cursor()
         
             if sql_update != "":
@@ -90,9 +79,9 @@ for row in cursor._rows:
                 sql_update = ""
 
         if not cnx_commit.is_connected():
-           cnx_commit = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                                host=CONST.BD_HOST,
-                                database=CONST.BD_DATABASE,connection_timeout=500,buffered=True)
+           cnx_commit = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                                host=cf.db_host,
+                                database=cf.db_name,connection_timeout=500,buffered=True)
 
         sql_update ="update git_table set updated_at=now() where id=" + str(row[0].decode("utf-8")) +";"
         cursor_v = cnx_commit.cursor()

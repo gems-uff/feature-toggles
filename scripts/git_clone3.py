@@ -3,18 +3,7 @@ import mysql.connector
 import os
 import subprocess
 import datetime
-
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-    REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
+import configs as cf
 
 def f_retorna_data_hora():
     return datetime.datetime.now().strftime("%H:%M:%S -- %d/%m/%Y")
@@ -46,9 +35,9 @@ def f_clone_pull(_url_repository, path, erro):
 
 
 print("conectado ao banco")
-cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 print("banco de dados conectado")
 
@@ -62,16 +51,16 @@ ret = ""
 for row in cursor._rows:
     print(f_retorna_data_hora() + "=====================================================")
     git_url = str(row[0].decode("utf-8"))+".git"
-    directory = CONST.REPO_DIR + str(row[1].decode("utf-8")) + "_" + str(row[2].decode("utf-8"))
+    directory = cf.repo_dir + str(row[1].decode("utf-8")) + "_" + str(row[2].decode("utf-8"))
 
     try:
   	erro = False
 
     	ret = f_clone_pull(git_url, directory,erro)
         if not erro:
-            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                                          host=CONST.BD_HOST,
-                                  database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+            cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                                          host=cf.db_host,
+                                  database=cf.db_name,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
             update_clone="update git_table set dt_clone=now() where id="+str(row[2].decode("utf-8"))+";"
             cursor.execute(update_clone)

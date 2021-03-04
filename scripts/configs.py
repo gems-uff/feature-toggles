@@ -1,0 +1,17 @@
+db_user = "exampleuser"
+db_pass= "examplepass"
+db_host= "examplehost"
+db_name= "examplename"
+repo_dir= "exampledir"
+gh_user= "exampleuser"
+gh_token= "exampletoken"
+gh_pass= "examplepass"
+time_limit= "exampletime"
+smtp_host= "examplehost"
+smtp_port= "exampleport"
+smtp_user= "examplelogin"
+smtp_pass= "examplepass"
+email_to= "examplemail"
+email_from= "examplemail"
+
+

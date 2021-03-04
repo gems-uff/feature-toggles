@@ -4,26 +4,14 @@ import smtplib
 import time 
 # Import the email modules we'll need
 from email.mime.text import MIMEText
-
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-    REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
-    TEMPO_LIMITE = 60
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
+import configs as cf
 
 def Verifica_Clonagem():
 
     print("conectado ao banco")
-    cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                                host=CONST.BD_HOST,
-                                database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+    cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                                host=cf.db_host,
+                                database=cf.db_name,connection_timeout=300,buffered=True)
     cursor = cnx.cursor()
     print("banco de dados conectado")
 
@@ -35,21 +23,21 @@ def Verifica_Clonagem():
 
     for row in cursor._rows:
         tempo_decorrido = row[0].decode("utf-8")
-        if int(tempo_decorrido) > int(CONST.TEMPO_LIMITE):
+        if int(tempo_decorrido) > int(cf.time_limit):
 
-            server = smtplib.SMTP('smtp.sistemaisbet.org.br',587)
+            server = smtplib.SMTP(cf.smtp_host,cf.smtp_port)
             server.ehlo()
             server.starttls()
             #Next, log in to the server
-            server.login("sistema@sistemaisbet.org.br", "b##et12@3##")
+            server.login(cf.smtp_user, cf.smtp_pass)
 
             #Send the mail
             body = "Ùltima data de clone:" + str(row[1].decode("utf-8"))# The /n separates the message from the headers
             msg = MIMEText(body)
-            msg['From'] = "sistema@sistemaisbet.org.br"
-            msg['To'] = "eduardosmil@gmail.com"
+            msg['From'] = cf.email_from
+            msg['To'] = cf.email_to
             msg['Subject'] = "Monitoramento Pegasus"
-            server.sendmail("sistema@sistemaisbet.org.br", "eduaardosami2al@gmail.com", msg.as_string())
+            server.sendmail(cf.email_from, "eduaardosami2al@gmail.com", msg.as_string())
 
             server.quit()
 

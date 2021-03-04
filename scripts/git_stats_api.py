@@ -4,17 +4,7 @@ import mysql.connector
 from json2html import json2html
 from datetime import datetime
 from requests.auth import HTTPBasicAuth
-
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
+import configs as cf
 
 '''
     headers = {'Accept': 'application/vnd.github.cloak-preview'}
@@ -22,9 +12,9 @@ CONST = CONST()
     data = requests.get(url,headers=headers).json()
     print(json2html.convert(json=data,table_attributes='border="1"'))
     '''
-    cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300)
+    cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300)
     cursor = cnx.cursor(buffered=True)
     select_repository = ("SELECT id, full_name FROM git_table t where not exists (select 1 from git_stats s where s.id_repo=t.id and git_last_commit is not null) order by id;")
     cursor.execute(select_repository)
@@ -47,7 +37,6 @@ CONST = CONST()
         if commit is not None:
             n_commits = len(list(commit))
             sha = commit[0].sha
-            _senha = "Basic ZWR1c21pbDpTbWkxMjMh"
             headers = {'Accept': 'application/vnd.github.cloak-preview'}
             url = "https://api.github.com/repos/"+_full_name+"/commits/"+sha
             data = requests.get(url,headers=headers).json()
@@ -66,9 +55,9 @@ CONST = CONST()
         n_merges = data.get("total_count","{date}")'''
 
         
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300)
+        cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300)
         cursor = cnx.cursor(buffered=True) 
 
         select_repository = ("SELECT 1 FROM git_stats where id_repo=" + str(_id) +";")

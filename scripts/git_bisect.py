@@ -2,6 +2,7 @@ import subprocess
 import mysql.connector
 import os
 import re
+import configs as cf
 
 def grep(grep_string, files):
     try:
@@ -19,9 +20,9 @@ def grep(grep_string, files):
     except:
         return ""
 
-cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
-                              host='50.62.209.195',
-                              database='edusmil_bdd',connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.bd_user, user=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, s.git_word, s.git_file_extension FROM git_table t, git_search s " 
@@ -67,9 +68,9 @@ for row in cursor._rows:
         commit_old_first = ""
     	while for_commit_first != commit_head:
         	if for_commit_first == "" or commit_head == "":
-           	   cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
-                	              host='50.62.209.195',
-                        	      database='edusmil_bdd',connection_timeout=300,buffered=True)
+           	   cnx = mysql.connector.connect(user=cf.bd_user, user=cf.db_pass,
+                	              host=cf.db_host,
+                        	      database=cf.db_name,connection_timeout=300,buffered=True)
             	   cursor = cnx.cursor() 
            	   update_search= "update git_table set git_commit"+str(indice)+"='"
             	   if for_commit_first != "":

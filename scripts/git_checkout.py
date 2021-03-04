@@ -4,18 +4,7 @@ import mysql.connector
 import os
 import re
 import sys
-
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-    REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
+import configs as cf
 
 def grep(grep_string, files):
     try:
@@ -74,9 +63,9 @@ def getAuthorsBetween(hash_parent1, hash_parent2):
         return ""
 
 
-cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, s.git_word, s.git_file_extension FROM git_table t, git_search s " 
@@ -124,9 +113,9 @@ for row in cursor._rows:
             
                 sql_insert = sql_insert + "(" + str(row[0].decode("utf-8")) +  ",1,now(),'" + str(_commit) + "'," + str(flag_fw) + "),"
 	 
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
         cursor = cnx.cursor()
         if sql_insert != "":
             sql_insert = sql_insert[:len(sql_insert)-1]
@@ -188,9 +177,9 @@ for row in cursor._rows:
                             print("Merge Branch..............: " + str(_commit))
                             sql_insert_merge_branch = sql_insert_merge_branch + "(" + str(row[0].decode("utf-8")) +  ",6,now(),'" + str(_commit) + "',NULL),"
             
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                            host=CONST.BD_HOST,
-                            database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                            host=cf.db_host,
+                            database=cf.db_name,connection_timeout=300,buffered=True)
         cursor = cnx.cursor()
         if sql_insert != "":
             sql_insert = sql_insert[:len(sql_insert)-1]
@@ -202,9 +191,9 @@ for row in cursor._rows:
         if sql_insert_merge_branch != "":            
             sql_insert_merge_branch = sql_insert_merge_branch[:len(sql_insert_merge_branch)-1]
             
-            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                            host=CONST.BD_HOST,
-                            database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+            cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                            host=cf.db_host,
+                            database=cf.db_name,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
        	    
             insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert_merge_branch + ";"
@@ -226,9 +215,9 @@ for row in cursor._rows:
         if sql_insert != "":
             sql_insert = sql_insert[:len(sql_insert)-1]
 
-            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                            host=CONST.BD_HOST,
-                            database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+            cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                            host=cf.db_host,
+                            database=cf.db_name,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
 
        	    insert_search= "insert into git_stats_local (id_repo, id_stats, timestamp, stats_value, stats_value_aux) values " + sql_insert + ";"

@@ -4,22 +4,11 @@ import sys
 sys.path.insert(0, '//home//eduardosmil//merge-effort//mergeeffort')
 import merge_analysis
 from pygit2 import *
+import configs as cf
 
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-    REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
-
-cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= ("select distinct t.id, t.name, t.language "
@@ -33,13 +22,13 @@ rs_git_search = cursor.fetchall()
 cnx.close()
 
 for row in cursor._rows:    
-    repo_path = CONST.REPO_DIR + str(row[1].decode("utf-8")) + "_" + str(row[0].decode("utf-8"))
+    repo_path = cf.repo_dir + str(row[1].decode("utf-8")) + "_" + str(row[0].decode("utf-8"))
     print("Repositório:" + repo_path)
     repo = Repository(repo_path)
 
-    cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+    cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
     cursor_repo = cnx.cursor()
 
     select_search= ("select distinct gl.stats_value "
@@ -72,9 +61,9 @@ for row in cursor._rows:
     if sql_insert != "":
         sql_insert = sql_insert[:len(sql_insert)-1]                
 
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
         cursor_insert_repo = cnx.cursor()
 
         insert_search= "insert into git_stats_local(id_repo, id_stats, timestamp, stats_value, stats_value_aux,stats_value_aux2) values " + sql_insert + ";"
