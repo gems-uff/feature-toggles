@@ -37,7 +37,7 @@ def Verifica_Clonagem():
             msg['From'] = cf.email_from
             msg['To'] = cf.email_to
             msg['Subject'] = "Monitoramento Pegasus"
-            server.sendmail(cf.email_from, "eduaardosami2al@gmail.com", msg.as_string())
+            server.sendmail(cf.email_from, cf.email_copy, msg.as_string())
 
             server.quit()
 
