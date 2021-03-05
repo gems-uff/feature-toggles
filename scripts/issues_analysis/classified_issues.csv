@@ -1,0 +1,540 @@
+id_issue;issue_number;id_repo;full_name;issue_title;issue_body;labels;URL;Bug related? (Heleno);Evidence;Obs;Leo;Eduardo;Obs Eduardo;Consensus;auto_classification;keyword_classif
+27020610.0;1734;347655;mozilla/zamboni;remove old games AER logic, remove admin content edit form (bug 968494);#NAME?;;https://github.com/mozilla/zamboni/issues/1734;1;https://bugzilla.mozilla.org/show_bug.cgi?id=968494;Needed to find the bug number in bugzilla. It is not clear if it is a bug or not only by lookng at the issue in github.;ok;1.0;;1.0;True;title/desc: bug
+31770316.0;1961;347655;mozilla/zamboni;Add regions for bug 987806 and others;"Add regions for bug 987806 and others
+";;https://github.com/mozilla/zamboni/issues/1961;-1;;Could not find this bug in bugzilla. It says its private.;Tb n?o sei. Mas tem que ver se eles usariam 'bug 987806' se a issue n?o fosse bug. Se tivesse que tender para um lado, iria para 1.;1.0;Acredito que tenha rela?o com o bug informado. Me pareceu um ajuste complementar;1.0;True;title/desc: bug
+17114978.0;927;347655;mozilla/zamboni;Use absolute path for nagios_check_packaged_app.zip;"This fixes a issue we are having in our new environment where the the signer check tries to look for the nagios_check_packaged_app.zip at /apps/amo/nagios_check_packaged_app.zip
+";;https://github.com/mozilla/zamboni/issues/927;1;This fixes a issue we are having' from the description;;ok;1.0;Merge Pull request;1.0;True;title/desc: fix
+20001700.0;1178;347655;mozilla/zamboni;explicitly cache counts for collection listings (bug 912484);;;https://github.com/mozilla/zamboni/issues/1178;1;https://bugzilla.mozilla.org/show_bug.cgi?id=912484;Needed to find the bug number in bugzilla. It is not clear if it is a bug or not only by lookng at the issue in github.;ok;1.0;;1.0;True;title/desc: bug
+17238679.0;935;347655;mozilla/zamboni;stats api authorization (bug 897528);"https://bugzilla.mozilla.org/show_bug.cgi?id=897528
+";;https://github.com/mozilla/zamboni/issues/935;1;https://bugzilla.mozilla.org/show_bug.cgi?id=897528;Description references bugzilla, where it says it is a defect;ok;1.0;;1.0;True;title/desc: bug
+99529786.0;3222;347655;mozilla/zamboni;Adds tags for restricted websites (bugs 1190549, 1190550).;"r? @ngokevin 
+";'r+';https://github.com/mozilla/zamboni/issues/3222;1;https://bugzilla.mozilla.org/show_bug.cgi?id=1190550;Needed to find the bug number in bugzilla. It is not clear if it is a bug or not only by lookng at the issue in github.;ok;1.0;Semelhante ao item da linha 3;1.0;True;title/desc: bug
+113473155.0;3417;347655;mozilla/zamboni;fix email reply reviewers comm;;;https://github.com/mozilla/zamboni/issues/3417;1;fix email reply' from the title;;ok;1.0;;1.0;True;title/desc: fix
+20058627.0;1187;347655;mozilla/zamboni;Remove captions from webapp previews (bug 920210);"https://bugzilla.mozilla.org/show_bug.cgi?id=920210
+";;https://github.com/mozilla/zamboni/issues/1187;1;https://bugzilla.mozilla.org/show_bug.cgi?id=920210;Description references bugzilla, where it says it is a defect;ok;1.0;;1.0;True;title/desc: bug
+26179485.0;1670;347655;mozilla/zamboni;Re-index both upsell and upsold when one of them changes (bug 956820);"https://bugzilla.mozilla.org/show_bug.cgi?id=956820
+";;https://github.com/mozilla/zamboni/issues/1670;1;https://bugzilla.mozilla.org/show_bug.cgi?id=956820;Description references bugzilla, where it says it is a defect;ok;1.0;;1.0;True;title/desc: bug
+573024.0;109;347655;mozilla/zamboni;Reviewlog;"r?kumar303 or r?gkoberger
+";;https://github.com/mozilla/zamboni/issues/109;1;https://bugzilla.mozilla.org/show_bug.cgi?id=622200;Needed to find the bug number in bugzilla. It is not clear if it is a bug or not only by lookng at the issue in github. The bug number is located at the title of a commit in the issue.;ok;1.0;;1.0;False;
+71296219.0;4;11027151;heneke/thymeleaf-extras-togglz;Document an XML Namespace URL;"So that my IDE isnt sad, itd be nice to have a documented XML Namespace URL to use.
+
+For extra credit, full support for the Eclipse plugin would be great: https://github.com/thymeleaf/thymeleaf-extras-eclipse-plugin#adding-content-assist-for-your-dialect
+";'enhancement';https://github.com/heneke/thymeleaf-extras-togglz/issues/4;0;tag 'enhancement';;ok;0.0;;1.0;False;
+41583760.0;2;11027151;heneke/thymeleaf-extras-togglz;Process expressions in togglz:active;"The attribute processor should process expressions inside togglz:active like
+
+``` html
+<div togglz:active=${feature}>
+content only visible if feature is active
+</div>
+```
+";;https://github.com/heneke/thymeleaf-extras-togglz/issues/2;-1;;Not sure.;Meu chute  '0'. Ele parece estar pedindo uma nova funcionalidade (processar uma express?o de feature toggles).;0.0;Concordo com Lo. Orienta?o no funcionamento do FW tooglz;0.0;False;
+95750860.0;5;11027151;heneke/thymeleaf-extras-togglz;Cant combine togglz:active with th:replace;"Hi,
+
+Ive tried to factor out, say, my Google Analytics JS to another file:
+
+```
+<!DOCTYPE html>
+<html lang=en
+xmlns:th=http://www.thymeleaf.org
+xmlns:togglz=https://github.com/heneke/thymeleaf-extras-togglz>
+<head>
+<title>Analytics</title>
+</head>
+<body>
+<script togglz:active=GOOGLE_ANALYTICS th:fragment=analytics th:inline=javascript>
+(function(i,s,o,g,r,a,m){i[GoogleAnalyticsObject]=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,script,//www.google-analytics.com/analytics.js,ga);
+
+var gaId = /*[[${@googleAnalyticsTrackingID}]]*/ null;
+ga(create, gaId, auto);
+ga(send, pageview);
+</script>
+</body>
+</html>
+```
+
+However, when I replace that fragment in another template, the `th:replace` seems to just pull down those other attributes, rather than applying them. For example, with this in my `<head>`:
+
+```
+<script th:replace=fragments/analytics :: analytics></script>
+```
+
+I get this output:
+
+```
+<script togglz:active=GOOGLE_ANALYTICS>
+(function(i,s,o,g,r,a,m){i[GoogleAnalyticsObject]=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,script,//www.google-analytics.com/analytics.js,ga);
+
+var gaId = UA-REDACTED-1;
+ga(create, gaId, auto);
+ga(send, pageview);
+</script>
+```
+
+So, the `th:inline` gets applied, but not the `togglz:active`...
+
+Is there some way to get things to work like Id hope, so I can avoid duplicating this chunk of code across several pages with rather different layouts, and still make it easy to disable entirely via Togglz as needed?
+
+Thanks.
+";;https://github.com/heneke/thymeleaf-extras-togglz/issues/5;0;Description: ''Is there some way to get things to work like I'd hope, so I can avoid duplicating this chunk of code across several pages with rather different layouts, and still make it easy to disable entirely via Togglz as needed?'';According to the description, the aim of the issue is to get help.;Ou, se n?o existir, pode ser visto como uma solicita?o de nova feature.;;;0.0;False;
+99484174.0;7;11027151;heneke/thymeleaf-extras-togglz;Document an XML namespace for togglz;"This should fix #4.
+
+If I get a chance to write the content assist stuff, Ill create a new PR for it.
+";;https://github.com/heneke/thymeleaf-extras-togglz/issues/7;1;Description: 'this should fix #4';;ok;0.0;N?o me pareceu um bug e sim ajuste na utiliza?o do FW tooglz;0.0;True;title/desc: fix
+165552610.0;8;11027151;heneke/thymeleaf-extras-togglz;Thymeleaf 3 support;"When Im trying to use thymeleaf-extras-togglz with Thymeleaf 3.0.0, my app fails with exception `java.lang.ClassNotFoundException: org.thymeleaf.dialect.IExpressionEnhancingDialect`.
+
+Do you have plans on adding support for Thymeleaf 3.0.0?
+";;https://github.com/heneke/thymeleaf-extras-togglz/issues/8;0;Description: 'Do you have plans on adding support for Thymeleaf 3.0.0?';According to the description, the aim of the issue is to get help.;ok;1.0;;0.0;True;title/desc: exception
+99450764.0;6;11027151;heneke/thymeleaf-extras-togglz;Document togglz:inactive;"I had to dig into the code to see that this was an option, so it would probably help to call this out in the main usage examples.
+";;https://github.com/heneke/thymeleaf-extras-togglz/issues/6;0;Description: 'I had to dig into the code to see that this was an option, so it would probably help to call this out in the main usage examples.';According to the descripton, the aim of the issue is to suggest changes.;ok;0.0;;0.0;False;
+252394101.0;11;11027151;heneke/thymeleaf-extras-togglz;Register StandardXmlNsTagProcessor to remove xmlns:togglz attribute;Fixes #10;;https://github.com/heneke/thymeleaf-extras-togglz/issues/11;1;Description: 'fixes #1';;ok;1.0;;1.0;False;
+42400335.0;3;11027151;heneke/thymeleaf-extras-togglz;Implement togglz:inactive;"Show DOM containers if feature is inactive.
+";;https://github.com/heneke/thymeleaf-extras-togglz/issues/3;0;Title: 'implement... ';;ok;0.0;;0.0;False;
+219979953.0;9;11027151;heneke/thymeleaf-extras-togglz;Support for attributes;"Is it possible to add support for attributes? At this time dialect doesnt support that. 
+
+Use-case: Id like to use different values in `href`/`src` attribute depends on active/inactive state of the feature. 
+
+Currently I have to have 2 copies of the tag with different `togglz:active`/`togglz:inactive` attributes.";;https://github.com/heneke/thymeleaf-extras-togglz/issues/9;0;Description: 'is it possible to...';According to the description the aim of to the issue is to ask for new features;ok;0.0;;0.0;False;
+36973726.0;1;11027151;heneke/thymeleaf-extras-togglz;Publish release to Maven Central;"It would be wonderful to have this artifact in Maven Central repository, so we, as users, may use it without cloning and building on our side.
+";;https://github.com/heneke/thymeleaf-extras-togglz/issues/1;0;Description: 'it would be wonderful to have...';According to the description the aim of to the issue is to ask for new features;ok;0.0;;0.0;False;
+270912554.0;1393;4693087;travis-ci/travis-web;add yellow circle for maintenance status page status;"That should fix this: 
+
+<img width=182 alt=screen shot 2017-11-03 at 10 01 05 src=https://user-images.githubusercontent.com/11158255/32366328-f034e51e-c07d-11e7-9f2a-a0cdb81f1c58.png> 
+
+And make it look more like this: 
+
+<img width=175 alt=screen shot 2017-11-03 at 10 02 09 src=https://user-images.githubusercontent.com/11158255/32366363-164ede1c-c07e-11e7-888b-4c8e936e8345.png> 
+";;https://github.com/travis-ci/travis-web/issues/1393;1;Description: 'that should fix...';;ok;1.0;;1.0;True;title/desc: fix
+306066050.0;1589;4693087;travis-ci/travis-web;[Enterprise] Update 2.2 to master to fix Marketing page showing up;"Were resyncing `enterprise-2.2` with `master` after noticing in QA that the marketing pages were showing in `enteprise-2.2`. @clekstro noticed that this was fixed in`master`. Looking at the fixes and changes in `master` and advising with @clekstro we decided to resync. This required a few fixes in https://github.com/travis-ci/travis-web/pull/1588 for Pusher but otherwise we seem to be golden. 
+
+So heres that backport to `enterprise-2.2`";;https://github.com/travis-ci/travis-web/issues/1589;1;Title: 'to fix marketing page...';;ok;1.0;;1.0;True;title/desc: fix
+263128017.0;1338;4693087;travis-ci/travis-web;Ensure user is redirected when unable to fetch feature flags/user details;The typical case is when we receive a `403` from the `/beta_features` or `/users` endpoint(s). When this happens, simply redirect to `/`, showing the message that the token is expired.;'do_not_merge';https://github.com/travis-ci/travis-web/issues/1338;1;Branch: 'ce-fix-hanging-on-loading-screen';The evidence can be checked at the issue (pull) URL. It comes from the branch 'ce-fix-hanging-on-loading-screen';ok;1.0;;1.0;True;title/desc: 403
+24063825.0;231;4693087;travis-ci/travis-web;Do not githubify sign-off messages;"Dont successfully `githubify` strings prepended with an `@` symbol if
+whats matched actually resembles an email address. @mentions should
+only be githubified if there is a word boundary before it.
+
+This fixes travis-ci/travis-ci#1591
+
+Signed-off-by: David Celis me@davidcel.is
+";;https://github.com/travis-ci/travis-web/issues/231;1;Description: 'this fixes...';;ok;1.0;;1.0;True;title/desc: fix
+184224983.0;737;4693087;travis-ci/travis-web;Fix README typo;"Hi all, thanks for Travis and for this public repo.
+
+Found a little typo in the README and this is the fix: `quotationmarks`?`quotation marks`.
+
+All the best!
+";;https://github.com/travis-ci/travis-web/issues/737;1;Title: 'fix readme typo';;ok;1.0;;1.0;True;title/desc: fix
+17302904.0;195;4693087;travis-ci/travis-web;Show loading indicator on Show More click;;;https://github.com/travis-ci/travis-web/issues/195;0;According to the title, looks like an enhancement;;ok;1.0;Fiquei na d£vida se n?o era um bug. Pelos commit relacionados foram feitos ajustes de textos e tags;0.0;False;
+181178064.0;714;4693087;travis-ci/travis-web;Bye bye beacon;"Move the beacon widget functionality to an Email support link in the navigation
+";;https://github.com/travis-ci/travis-web/issues/714;0;According to the description, looks like an enhancement;;ok;1.0;Idem ao anterior;0.0;False;
+252593547.0;1256;4693087;travis-ci/travis-web;Refactor trigger build logic to use derived states;"This extracts out the ember-concurrency tasks into separate parent/child tasks and uses 
+`timeout` instead of Ember.run.later.";'do_not_merge';https://github.com/travis-ci/travis-web/issues/1256;0;Title: 'refactor...';;ok;0.0;;0.0;False;
+208729608.0;954;4693087;travis-ci/travis-web;Update ember-source to version 2.11.2;"Hello lovely humans,
+
+[ember-source](https://www.npmjs.com/package/ember-source) just published its new version 2.11.2.
+
+<table>
+<tr>
+<th align=left>
+State
+</th>
+<td>
+Update :rocket:
+</td>
+</tr>
+<tr>
+<th align=left>
+Dependency
+</td>
+<td>
+ember-source
+</td>
+</tr>
+<tr>
+<th align=left>
+New version
+</td>
+<td>
+2.11.2
+</td>
+</tr>
+<tr>
+<th align=left>
+Type
+</td>
+<td>
+devDependency
+</td>
+</tr>
+</table>
+
+This version is **not covered** by your **current version range**.
+
+Without accepting this pull request your project will work just like it did before. There might be a bunch of new features, fixes and perf improvements that the maintainers worked on for you though.
+
+I recommend you look into these changes and try to get onto the latest version of ember-source.
+Given that you have a decent test suite, a passing build is a strong indicator that you can take advantage of these changes by merging the proposed change into your project. Otherwise this branch is a great starting point for you to work on the update.
+
+
+Do you have any ideas how I could improve these pull requests? Did I report anything you think isn?t right?
+Are you unsure about how things are supposed to work?
+
+There is a collection of [frequently asked questions](https://greenkeeper.io/faq.html) and while I?m just a bot, there is a group of people who are happy to teach me new things. [Let them know](https://github.com/greenkeeperio/greenkeeper/issues/new).
+
+Good luck with your project :sparkles:
+
+You rock!
+
+:palm_tree:
+
+---
+The new version differs by 4 commits .
+
+- [`c0e1e56`](https://github.com/emberjs/ember.js/commit/c0e1e56b964287474ad0955b2a86484c6a0b67f1) <code>Release 2.11.2.</code>
+- [`b425210`](https://github.com/emberjs/ember.js/commit/b4252102477e502fe13c718c1032889f6bdc5480) <code>Update CHANGELOG.md for 2.11.2.</code>
+- [`a1109b9`](https://github.com/emberjs/ember.js/commit/a";'greenkeeper';https://github.com/travis-ci/travis-web/issues/954;0;Title: 'update ...';;Aqui fiquei em d£vida. Ele pede para atualizar algo para vers?o 2.11.2 e justifica que pode ter novas features, fixes e melhorias de desempenho. Mas pensando bem, parece que  um robo que criou. N?o parece haver um bug espec¡fico. Para o nosso caso, seria melhor n?o considerar como bug.;0.0;;0.0;True;title/desc: fix
+132106415.0;453;4693087;travis-ci/travis-web;Use V3 API for restarting and cancelling a build and a job;;;https://github.com/travis-ci/travis-web/issues/453;0;According to the title, looks like an enhancement;;ok;0.0;;0.0;False;
+245802213.0;703;12736575;ccnmtl/capsim;Update pyasn1 to 0.3.1;"
+Theres a new version of [pyasn1](https://pypi.python.org/pypi/pyasn1) available.
+You are currently using **0.2.3**. I have updated it to **0.3.1**
+
+
+
+These links might come in handy: <a href=https://pypi.python.org/pypi/pyasn1>PyPI</a> | <a href=https://pyup.io/changelogs/pyasn1/>Changelog</a> | <a href=https://github.com/etingof/pyasn1>Repo</a> 
+
+
+*I couldnt find a changelog for this release. Do you know where I can find one? [Tell me!](https://github.com/pyupio/changelogs/issues/new)*
+
+
+*Got merge conflicts? Close this PR and delete the branch. Ill create a new PR for you.*
+
+Happy merging!";;https://github.com/ccnmtl/capsim/issues/703;0;Title: 'update ...';;Novamente, parece ser rob. Ele sugere atualizar 0.2.3 para 0.3.1. Pela numera?o, tem feature e fix. Mas, na pr tica, n?o  consequncia de um defeito. Pensando no contexto do nosso paper, o certo seria n?o indicar como bug.;0.0;;0.0;False;
+294117172.0;898;12736575;ccnmtl/capsim;Update setuptools to 38.4.1;"
+Theres a new version of [setuptools](https://pypi.python.org/pypi/setuptools) available.
+You are currently using **38.4.0**. I have updated it to **38.4.1**
+
+
+
+These links might come in handy: <a href=https://pypi.python.org/pypi/setuptools>PyPI</a> | <a href=https://pyup.io/changelogs/setuptools/>Changelog</a> | <a href=https://github.com/pypa/setuptools>Repo</a> 
+
+
+
+### Changelog
+> 
+>### 38.4.1
+
+>-------
+
+>* 1257: In bdist_egg.scan_module, fix ValueError on Python 3.7.
+
+
+
+
+
+
+
+*Got merge conflicts? Close this PR and delete the branch. Ill create a new PR for you.*
+
+Happy merging!";;https://github.com/ccnmtl/capsim/issues/898;0;Title: 'update ...';;Idem. Robo. De acordo.;0.0;;0.0;True;title/desc: fix
+239036287.0;669;12736575;ccnmtl/capsim;Update django-waffle to 0.12.0;"
+Theres a new version of [django-waffle](https://pypi.python.org/pypi/django-waffle) available.
+You are currently using **0.11.1**. I have updated it to **0.12.0**
+
+
+
+These links might come in handy: <a href=https://pypi.python.org/pypi/django-waffle>PyPI</a> | <a href=https://pyup.io/changelogs/django-waffle/>Changelog</a> | <a href=http://github.com/jsocol/django-waffle>Repo</a> 
+
+
+
+### Changelog
+> 
+>### 0.12
+
+>=====
+
+>- Drop support for Django&lt;1.8 and Python&lt;2.7.
+>- Moved bulk of code from waffle.*_is_active methods to .is_active
+> instance methods.
+>- Centralized caching code behind Class.get() methods.
+>- Significant caching overhaul.
+>- Automatically invalidate cache on waffle upgrade.
+
+
+
+
+
+
+
+
+*Got merge conflicts? Close this PR and delete the branch. Ill create a new PR for you.*
+
+Happy merging!";;https://github.com/ccnmtl/capsim/issues/669;0;Title: 'update ...';;ok;0.0;Atualiza?o de vers?o do FW;0.0;True;title/desc: invalid
+93210639.0;73;12736575;ccnmtl/capsim;:arrow_up: pandas 0.16.1. PMT #101283;;;https://github.com/ccnmtl/capsim/issues/73;0;:arrow_up in the title seems to indicate update;;ok;0.0;;0.0;False;
+80922447.0;50;12736575;ccnmtl/capsim;:arrow_up: django-treebeard 2.0;;;https://github.com/ccnmtl/capsim/issues/50;0;:arrow_up in the title seems to indicate update;;ok;0.0;;0.0;False;
+213972589.0;588;12736575;ccnmtl/capsim;:arrow_up: Faker 0.7.10;;;https://github.com/ccnmtl/capsim/issues/588;0;:arrow_up in the title seems to indicate update;;ok;0.0;;0.0;False;
+155673249.0;286;12736575;ccnmtl/capsim;:arrow_up: pyparsing 2.1.4;;;https://github.com/ccnmtl/capsim/issues/286;0;:arrow_up in the title seems to indicate update;;ok;0.0;;0.0;False;
+127187626.0;182;12736575;ccnmtl/capsim;:arrow_up: kombu 3.0.33. PMT #104694;;;https://github.com/ccnmtl/capsim/issues/182;0;:arrow_up in the title seems to indicate update;;ok;0.0;;0.0;False;
+225433383.0;624;12736575;ccnmtl/capsim;:arrow_up: setuptools 35.0.2;;;https://github.com/ccnmtl/capsim/issues/624;0;:arrow_up in the title seems to indicate update;;ok;0.0;;0.0;False;
+116118046.0;134;12736575;ccnmtl/capsim;Jshint jscs;;;https://github.com/ccnmtl/capsim/issues/134;0;Files edited;Seems like an improvement. Checked the files chenged in the URL.;ok;0.0;;0.0;False;
+100014880.0;211;5541660;picklesdoc/pickles;Remove right-alignment;"Resolves #209 
+";;https://github.com/picklesdoc/pickles/issues/211;1;References issue #209, which is a reported bug;Issue #209 link https://github.com/picklesdoc/pickles/issues/209;ok;1.0;;1.0;False;
+196065845.0;406;5541660;picklesdoc/pickles;Release 2.11.1;"## [2.11.1] - 2016-12-16 
+
+### Fixed 
+
+- Enable Pickles to deal with ignored scenario examples in VsTest Result Provider ([340](https://github.com/picklesdoc/pickles/pull/340)) (by [@dirkrombauts](https://github.com/dirkrombauts)) 
+- Enable xUnit Test Result Provider to Deal with more than 255 Scenarios in a File ([405](https://github.com/picklesdoc/pickles/pull/405)) (by [@dirkrombauts](https://github.com/dirkrombauts)) 
+
+";;https://github.com/picklesdoc/pickles/issues/406;-1;Description: 'fixed...';Seems like a release, where some bugs were fixed. Not sure if it should be classified as a bug issue.;Eu acho que, pensando no contexto do nosso paper, onde queremos contar quantos bugs tinham sido reportados antes e depois, isso aqui deveria ser '0'. Note que para n¢s n?o  relevante se  feature ou outra coisa. A pergunta  ' bug?'.;0.0;;0.0;False;
+51665721.0;177;5541660;picklesdoc/pickles;The GUI client should not allow the user to click the validation checkmarks;;'bug';https://github.com/picklesdoc/pickles/issues/177;1;tag 'bug';;ok;1.0;;1.0;False;
+29819701.0;96;5541660;picklesdoc/pickles;Try to make teamcity build pass again;;;https://github.com/picklesdoc/pickles/issues/96;1;Title: 'make teamcity build pass again';Seems to be related to a build failure.;Pelo t¡tulo, pode ser bug, mas pode ser algum problema de configura?o. A evidncia mais forte  o label bug. Ok.;1.0;;1.0;False;
+39288942.0;132;5541660;picklesdoc/pickles;Create a build script in FAKE;;;https://github.com/picklesdoc/pickles/issues/132;0;Title: 'create...';According to the title, looks like an enhancement;ok;0.0;;0.0;False;
+146455041.0;316;5541660;picklesdoc/pickles;Added hyphen to underscore Replace to ScenarioNames;"Pickles will fail when the Feature/Scenario Name has a hyphen - in the name
+and there are test results. Changing the hyphens to Underscores to match
+the test results solves this.
+";;https://github.com/picklesdoc/pickles/issues/316;1;Description: 'pickles will fail when...';;ok;1.0;;1.0;False;
+171937180.0;364;5541660;picklesdoc/pickles;Release 2.8.2;;;https://github.com/picklesdoc/pickles/issues/364;-1;;Its a release, but I'm not sure if it should be classified as bug or not, since the bugs fixed in the release are referenced in other issues (according to the change log);Como comentei antes, essa issue n?o reporta um bug. A release pode at conter fixes, mas esses foram reportados em outra issue.;0.0;;0.0;False;
+55752432.0;186;5541660;picklesdoc/pickles;Use the Gherkin3 parser;"There are several tasks to be done in order to use the upcoming Gherkin3 parser.
+- [ ] Upgrade all projects to .NET 4.5
+- [ ] Upgrade all nuget packages
+- [ ] Remove the gherkin and IKVM packages
+- [ ] Create a translation from the Gherkin3 object model to these Pickles object model classes
+- [ ] Example
+- [ ] Feature
+- [ ] Keyword
+- [ ] Scenario
+- [ ] ScenarioOutline
+- [ ] Step
+- [ ] Table
+- [ ] TableRow
+- [ ] Make picklesparser use the Gherkin3 parser and the translations
+- [ ] Find an alternative for LanguageServices (GherkinDialectProvider?)
+- [ ] Remove unused code from the old parsing routines
+";"'enhancement'; 'vNext'";https://github.com/picklesdoc/pickles/issues/186;0;tag 'enhancement';;ok;0.0;;0.0;False;
+8800776.0;22;5541660;picklesdoc/pickles;Breaking Change: Moving Namespaces and assemblies to PicklesDoc.*;"Im moving all namespaces and assembly names to PicklesDoc.*. I imagine that this is a breaking change if you have scripted Pickles somewhere in your toolchain.
+";'newfeature';https://github.com/picklesdoc/pickles/issues/22;0;tag 'newfeature';;ok;0.0;;0.0;False;
+42501599.0;142;5541660;picklesdoc/pickles;Remove dependencies from the Nuget packages;"Installing Pickles.CommandLine installs the following packages in my project (and add references):
+Autofac (ò 2.6.3.862)
+NDesk.Options (ò 0.2.1)
+NLog.Config (ò 3.1.0.0)
+System.IO.Abstractions (ò 1.4.0.86)
+
+Its not required and non desired behavior from a tool package.
+These should be dev dependencies but the final package should remain standalone. 
+NUnit.Runners is a good example: https://www.nuget.org/packages/NUnit.Runners/
+";;https://github.com/picklesdoc/pickles/issues/142;0;Title: 'remove...';According to the title the aim of to the issue is to ask for new features;Ser ? Eu tive a impress?o de que o usu rio est  reclamando que o pickles est  instalando dependncias inaproriadas, e est  pedindo para remover essas dependncias (ele fala que s?o dependncias que deveriam estar declaradas como dev e n?o prod). Ele tem raz?o quanto ao NUnit. N?o faz sentido colocar como prod. Parece um bug, mas n?o no software em si. O bug estaria nos descritores.;0.0;Pois . Fiquei na duvida tambm. Pediu para remover dependencias do pacote nuget. N?o sei se isso estava gerando um problema para usu rio;1.0;False;
+264621455.0;9;18810181;pheidotting/dejonge;Iets meer info;;;https://github.com/pheidotting/dejonge/issues/9;0;Title;The title translates to 'A little more info'.;Esse eu n?o entendi o que seria a issue. Olhei o c¢digo e vi que eles aumentam a info no log. Ok em n?o cadastrar como bug.;0.0;;0.0;False;
+266240546.0;19;18810181;pheidotting/dejonge;Nullpointer bij opslaan;;;https://github.com/pheidotting/dejonge/issues/19;1;Title;The title translates to 'Nullpointer on save'.;ok;1.0;;1.0;False;
+265576721.0;17;18810181;pheidotting/dejonge;Heel stuk reverten;;;https://github.com/pheidotting/dejonge/issues/17;-1;;The title translates to 'Quite a lot of revert'. Not sure how it should be classified.;Olhei no c¢digo mas n?o consegui entender muito. Parece que reverteram algo, mas qual a raz?o?;1.0;Isso mesmo. Por alguma raz?o voltaram atr s. Eu trataria como um bug;1.0;False;
+266606723.0;20;18810181;pheidotting/dejonge;quartz weg;;;https://github.com/pheidotting/dejonge/issues/20;0;Changed files;The title translates to 'quartz way'. Looking at the changed files, a dependency (quartz) was removed from the pom.xml file.;ok;0.0;;0.0;False;
+264456888.0;7;18810181;pheidotting/dejonge;Development;;;https://github.com/pheidotting/dejonge/issues/7;-1;;Many files have been changed. Not sure how it should be classified.;Pelo t¡tulo, colocaria '0'.;0.0;;0.0;False;
+264718134.0;11;18810181;pheidotting/dejonge;"Verbetering van de LogglyAppender; extra logging";;;https://github.com/pheidotting/dejonge/issues/11;0;Title;"Title translates to 'Improvement of the LogglyAppender; extra logging'";ok;0.0;Adi?o de log;0.0;False;
+265043949.0;12;18810181;pheidotting/dejonge;Development;;;https://github.com/pheidotting/dejonge/issues/12;1;Changed files;Changed files adds a null check. Might indicate a bug.;;1.0;ok;1.0;False;
+264355546.0;6;18810181;pheidotting/dejonge;versienummer;;;https://github.com/pheidotting/dejonge/issues/6;0;Title and changed files;Title translates to 'version number'. It only modifies the version of the softweare.;ok;0.0;;0.0;False;
+267454701.0;22;18810181;pheidotting/dejonge;Opslaan Polis/Schade bij Bedrijf;;;https://github.com/pheidotting/dejonge/issues/22;-1;;Title translates to 'Save Policy / Damage with Company'. Changed files add a new try catch block with a new block of code. Not sure how it should be classified.;Parece uma verifica?o do IP para decidir se deixa o cara usar o sistema. Em princ¡pio, n?o classificaria como bug.;0.0;;0.0;False;
+264460082.0;8;18810181;pheidotting/dejonge;eem uut;;;https://github.com/pheidotting/dejonge/issues/8;1;Changed files;Changed files move a log to an if statement. Possibly due to bug.;Na verdade o log antigo estava comentado. Na pr tica, essa issue adicionou o log. N?o sei se classificaria como bug.;0.0;N?o tem como saber. Tem a remo?o de log e adi?o de boleano.??;;False;
+264709951.0;10;18810181;pheidotting/dejonge;Extra logging, verbetering van de LogglyAppender;;;https://github.com/pheidotting/dejonge/issues/10;0;Title;Title translates to: 'Additional logging, improvement of the LogglyAppender';ok;;;0.0;False;
+85725888.0;3;27288669;iiiepe/dashi3;Google Analytics;"Integrate Google Analytics as a Widget
+";;https://github.com/iiiepe/dashi3/issues/3;0;Description: 'integrated...';;ok;0.0;nova implementa?o;0.0;False;
+85656774.0;1;27288669;iiiepe/dashi3;Edit a dashboard;"A dashboard should be editable.
+";;https://github.com/iiiepe/dashi3/issues/1;0;;It is still an open issue. Seems like an improvement.;ok;0.0;;0.0;False;
+85725932.0;4;27288669;iiiepe/dashi3;Update README.md;"To reflect all the new env variables needed to bootstrap the application 
+";;https://github.com/iiiepe/dashi3/issues/4;0;Title: 'update...';;ok;0.0;;0.0;False;
+85726082.0;6;27288669;iiiepe/dashi3;Add login/logout links;"Login and logout links are not anywhere.
+";;https://github.com/iiiepe/dashi3/issues/6;0;Title: 'add...';;Pela descri?o parece ser um bug, n?o?;1.0;Pela descri?o do commit achei que fosse bug sim;1.0;False;
+85726093.0;7;27288669;iiiepe/dashi3;Restore single line graph;"Single line graphs are disabled, restore them.
+";;https://github.com/iiiepe/dashi3/issues/7;0;Description;;ok;1.0;Me pareceu sim um bug. Foram feitos v rios ajustes no c¢digo mas daria para saber se era ou n?o em fun?o de defeito;0.0;False;
+85726015.0;5;27288669;iiiepe/dashi3;Enable i18n;"Localization is important in our context, so is necessary to enable.
+";;https://github.com/iiiepe/dashi3/issues/5;0;Title: 'enable...';;ok;0.0;Solicita?o de ajuste mas n?o d  para saber se gera ou n?o algum deifeito;0.0;False;
+85834665.0;10;27288669;iiiepe/dashi3;Video widget;"Create a video widget
+";;https://github.com/iiiepe/dashi3/issues/10;0;Title: 'create...';;ok;0.0;Solicita?o de ajuste mas n?o d  para saber se gera ou n?o algum deifeito;0.0;False;
+85725799.0;2;27288669;iiiepe/dashi3;Enable authentication for Data endpoint;"All data endpoints are disabled right now to move faster in the implementation of the new api. Is necessary to restore permissions.
+";;https://github.com/iiiepe/dashi3/issues/2;0;Description;;ok;0.0;;0.0;False;
+85834583.0;8;27288669;iiiepe/dashi3;Image Widget;"Create an image widget
+";;https://github.com/iiiepe/dashi3/issues/8;0;Description: 'create...';;ok;0.0;;0.0;False;
+85834627.0;9;27288669;iiiepe/dashi3;Slideshow widget;"Create an slideshow widget
+";;https://github.com/iiiepe/dashi3/issues/9;0;Description: 'create...';;ok;0.0;;0.0;False;
+173320492.0;114;50667950;CenterForOpenScience/exp-addons;Remove form validation to facilitate testing;"## Purpose
+
+To make testing the survey quicker, remove form validation checks so that the entire survey does not have to be completed each time.
+";;https://github.com/CenterForOpenScience/exp-addons/issues/114;0;Description: 'purpose: ...';;ok;0.0;;0.0;True;title/desc: does not
+137281813.0;24;50667950;CenterForOpenScience/exp-addons;Add experiment feedback;;;https://github.com/CenterForOpenScience/exp-addons/issues/24;0;Description: 'add...';;ok;0.0;;0.0;False;
+156620303.0;72;50667950;CenterForOpenScience/exp-addons;Pref phys addons;"Current progress on preview & mood questionnaire frames. Works w/ Preferential physics study on experimenter.
+";;https://github.com/CenterForOpenScience/exp-addons/issues/72;0;Seems like normal development/enhancements. Checked the thread and changed files.;;ok;0.0;;0.0;False;
+141353842.0;66;50667950;CenterForOpenScience/exp-addons;Feature/more cleanup;"Refs: https://openscience.atlassian.net/browse/LEI-
+Companion to: 
+## Purpose
+## Summary of changes
+## Testing notes
+";;https://github.com/CenterForOpenScience/exp-addons/issues/66;0;Title: 'feature...';;ok;0.0;;0.0;False;
+196472484.0;210;50667950;CenterForOpenScience/exp-addons;Production site should build in production mode;"Refs: https://openscience.atlassian.net/browse/LEI-275 
+Companion to: TBD 
+
+## Purpose 
+Address error where attributes were not available on prototype in Lookit production builds (though they were available in debug mode builds) 
+
+This removes blockers for Lookit, Experimenter, and ISP apps to deploy in production mode. 
+
+## Summary of changes 
+- Make `expStates` available as an enum when no instance is available (useful for Lookit queries) 
+
+## Testing notes 
+Primary testing for this PR will be done as used with LEI consuming apps.";;https://github.com/CenterForOpenScience/exp-addons/issues/210;1;Description: 'address error where...';;ok;1.0;;1.0;True;title/desc: error
+191368777.0;202;50667950;CenterForOpenScience/exp-addons;Minor wording change to exp-exit-survey;Im very sorry this is coming late :( Doesnt need to get merged today/with this release, but if its easy to sneak in soon thatd be great...;;https://github.com/CenterForOpenScience/exp-addons/issues/202;0;Title: 'minor wording change';;ok;0.0;;0.0;False;
+195896565.0;209;50667950;CenterForOpenScience/exp-addons;Update csv-writer to use a blank value for JSON null type;"Companion to: CenterForOpenScience/experimenter#129 
+
+## Purpose 
+Changes csv-writer util to output an empty string `` instead of `null` 
+
+## Summary of changes 
+csv-writer and test 
+
+## Testing notes 
+JSON null should be an empty string 
+
+";;https://github.com/CenterForOpenScience/exp-addons/issues/209;0;Title: 'update...';;Me parece bug. Por alguma raz?o, querem fazer output de vazio no lugar de null.;1.0;Tambm achei que de alguma forma o ajuste representando a corre?o de algum defeito;1.0;False;
+187595891.0;196;50667950;CenterForOpenScience/exp-addons;Feature: fix select validation [LEI-306];"Refs: 
+- https://trello.com/c/cwBpdYLi/5-edge-case-overview-background-form-if-user-fills-out-form-but-then-changes-age-gender-residence-to-default-please-select-they-ar 
+- https://openscience.atlassian.net/browse/LEI-306 
+
+## Purpose 
+- Fix `Assertion Failed: You must use Ember.set() to set the value property` that prevents users from advancing to free-response form after clicking Continue on the overview form. 
+- Fix issue where `loadData` gets called after changing the value of a question, overwriting the new value (e.g. when clicking Previous Page to return to the overview form from the free-response form, changing a select question back to Please Select would not make the Continue button disabled because the value was getting overwritten with the previous, valid value) 
+
+## Summary of changes 
+- Use `Ember.set()` to set question values 
+- Only call `loadData` from `didReceiveAttrs` if the frameIndex has changed 
+
+## Testing notes 
+1. Fill out the overview form and click Continue 
+2. On the next frame (exp-free-response), click Previous Page to return to the overview form 
+3. Change the answer to the first question to Please Select. The continue button should be disabled. 
+4. Change the answer back to a valid answer. The continue button should be enabled. 
+5. After clicking the continue button, you should be taken to the free-response page. 
+";;https://github.com/CenterForOpenScience/exp-addons/issues/196;1;Description: 'fix issue where...';;ok;1.0;;1.0;True;title/desc: fix
+166668957.0;94;50667950;CenterForOpenScience/exp-addons;Feature/exp overview;"Refs: https://openscience.atlassian.net/browse/LEI-
+Companion to: 
+## Purpose
+## Summary of changes
+## Testing notes
+";;https://github.com/CenterForOpenScience/exp-addons/issues/94;-1;;Seems like a long development thread. It includes some bug fixing, but I'm not sure if it should be classified as a bug issue.;ok em n?o classificar como bug.;1.0;Complicado saber. Foram feitos v rios ajustes mas n?o tenho certeza que foi em fun?o de um defeito. Me pareceu sim;1.0;False;
+183709802.0;175;50667950;CenterForOpenScience/exp-addons;Add preferNoAnswer option to last measures question [LEI-264];"Refs: https://openscience.atlassian.net/browse/LEI-264
+
+For the last question on the exp-rating-form, add the option I prefer not to answer: ![screen shot 2016-10-18 at 10 51 00 am](https://cloud.githubusercontent.com/assets/6414394/19483036/e562f09c-9520-11e6-858a-9ba5c12d0f77.png)
+";;https://github.com/CenterForOpenScience/exp-addons/issues/175;0;Title: 'add...';;ok;0.0;;0.0;False;
+253117251.0;23;98208593;avigan/VLTPF;Improve the example code included in the package;"IRDIS and IFS reduction
+ipython notebook
+Include a dataset?";"'IFS'; 'IRDIS'; 'enhancement'";https://github.com/avigan/VLTPF/issues/23;0;tag 'enhancement';;ok;0.0;;0.0;False;
+251773037.0;15;98208593;avigan/VLTPF;Improve display and saving of plots generated in the reduction;Automatically save plots;"'IFS'; 'missing'";https://github.com/avigan/VLTPF/issues/15;0;tag 'missing' and title 'improve...';;ok;0.0;;0.0;False;
+253117148.0;22;98208593;avigan/VLTPF;Implement a first version of the IRDIS reduction class;"- [x] create the structure and placeholders for the main methods 
+- [x] implement a first version of the main methods";"'IRDIS'; 'missing'";https://github.com/avigan/VLTPF/issues/22;0;tag 'missing' and title 'implement a ...';;ok;0.0;;0.0;False;
+251412146.0;9;98208593;avigan/VLTPF;Add a check that esorex is in the path;"Must be done before calling any of the static calibration methods. 
+Maybe also check that the SPHERE recipes are installed.";"'SPHERE'; 'enhancement'";https://github.com/avigan/VLTPF/issues/9;0;tag 'enhancement';;ok;0.0;;0.0;False;
+252992360.0;21;98208593;avigan/VLTPF;List reduction keywords common between IRDIS and IFS;List them and try to make them compatible between the two instruments to simplify the class implementation.;"'IFS'; 'IRDIS'; 'optimization'";https://github.com/avigan/VLTPF/issues/21;0;tag 'optimization';;ok;0.0;;0.0;False;
+257803707.0;39;98208593;avigan/VLTPF;Implementation of the IRDIS/DPI mode support;"- [ ] object definition 
+- [ ] basic methods to sort files & frames 
+- [ ] creation of calibrations 
+- [ ] pre-processing of science frames 
+- [ ] processing of science frames 
+- [ ] cleaning 
+- [ ] small refinements specific to LSS";"'IRDIS'; 'feature'; 'long term'";https://github.com/avigan/VLTPF/issues/39;0;tag 'feature';;ok;0.0;;0.0;False;
+277448535.0;49;98208593;avigan/VLTPF;Possible optimisations for sigma_filter;"Two possible optimisations for sigma_filter in imutils.py: 
+
+1. scipys uniform_filter() is about 4x faster than astropys Box2DKernel and convolve(). Using uniform_filters constant mode (i.e. zero padding), the two agree to about ~1e-13. The replacement would be as follows: 
+``` 
+# Current 
+box2 = box**2 
+
+kernel = Box2DKernel(box) 
+img_clip = (convolve(img, kernel)*box2 - img) / (box2-1) 
+
+imdev = (img - img_clip)**2 
+fact = nsigma**2 / (box2-2) 
+imvar = fact*(convolve(imdev, kernel)*box2 - imdev) 
+
+# Replacement 
+from scipy.ndimage.filter import uniform_filter 
+
+box2 = box**2 
+
+img_clip = (uniform_filter(img, box, mode = constant)*box2 - img)/(box2-1) 
+
+imdev = (img - img_clip)**2 
+fact = nsigma**2 / (box2-2) 
+imvar = fact*(uniform_filter(imdev, box, mode = constant)*box2 - imdev) 
+``` 
+
+2. I think its safe to assume that if one iteration of sigma clipping does not clip any values, then no future iteration will ever do so, because each is passing the same, unchanged input to the next iteration. Ive found this typically cuts the number of iterations in half. One can check if any pixels are changed with: 
+``` 
+nchange = img.size - nok 
+if (iterate is True): 
+_iters = _iters+1 
+if (_iters >= max_iter) or nchange == 0: 
+# return... 
+```";"internal'; 'optimization'";https://github.com/avigan/VLTPF/issues/49;0;tag 'optimization';;ok;;;0.0;True;title/desc: does not
+277411123.0;47;98208593;avigan/VLTPF;Bad pixel interpolation fails if too few good pixels within ddmax;"vltpf.utils.imutils.fix_badpix throws an error if too few good pixels (i.e. less than npix) are found, specifically on line 1039 when it tries to index the first npix pixels. This can occur at the corners of IFS flat frames, where (0, 0) is more than ddmax (= 100) pixels from any good, illuminated pixels, and so the array good_pix is empty. 
+
+One possible solution is just to increase ddmax, with ~170 needed to avoid problems on IFS frames. Alternatively, a simple replacement value could be used in such cases - if a pixel is more than 100px outside the illuminated area, its value really doesnt matter. 
+
+Edit: The value does matter slightly, actually, as the flat frame is normalised again after the step where I was getting the error. Maybe fill with the frame mean, or fill with np.nan and use np.nanmedian to normalise, perhaps replacing nans with a nicer value later?";'bug';https://github.com/avigan/VLTPF/issues/47;1;tag 'bug';;ok;1.0;;1.0;True;title/desc: fix
+251768013.0;14;98208593;avigan/VLTPF;Mask values outside of IFS FoV;Will require to implement a mask option in imutils;"'IFS'; 'enhancement'";https://github.com/avigan/VLTPF/issues/14;0;tag 'enhancement';;ok;0.0;Fiquei na duvida. Mas vamos sem bug;0.0;False;
+277487633.0;50;98208593;avigan/VLTPF;sph_ifs_combine_data does not respect nocenter for SCIENCE frames;Whilst the nocenter option is correctly adhered to for FLUX and CENTER frames in sph_ifs_combine_data, it is ignored for SCIENCE frames, as the if nocenter/else check is missing for SCIENCE frames.;;https://github.com/avigan/VLTPF/issues/50;-1;;Author of the issue thought that something was not working properly. A developer answered saying that the author misunderstood it.;Interessante. Ent?o a issue era bug, mas o bug n?o existia. Ainda tem isso, n?!;0.0;Apesar de classificado como bug, n?o era. Coloco como zero.;0.0;True;title/desc: does not
+306509547.0;4;85057381;orozdolskyi/hneu-personal-account;resolve #2 Students profile with active disciplines creation;;;https://github.com/orozdolskyi/hneu-personal-account/issues/4;-1;;The repo is not accessible anymore;Nesse caso, n?o dever¡amos pegar outro?;;404;;True;title/desc: resolve
+326089776.0;14;85057381;orozdolskyi/hneu-personal-account;Integrate cashing;;'improvement';https://github.com/orozdolskyi/hneu-personal-account/issues/14;0;tag 'improvement';The repo is not accessible anymore;;;404;;False;
+314403056.0;12;85057381;orozdolskyi/hneu-personal-account;add a Jenkinsfile;resolve #11;;https://github.com/orozdolskyi/hneu-personal-account/issues/12;0;Title: 'add...';The repo is not accessible anymore;;;404;;True;title/desc: resolve
+326090155.0;15;85057381;orozdolskyi/hneu-personal-account;Performance testing;;'testing';https://github.com/orozdolskyi/hneu-personal-account/issues/15;0;Title: '... testing';The repo is not accessible anymore;;;404;;False;
+306170986.0;2;85057381;orozdolskyi/hneu-personal-account;create students profile with active disciplines;"Only active disciplines should be included to the list of students disciplines during creation of a new student profile. 
+
+You can determine whether is discipline active by using the next flag: https://github.com/orozdolskyi/hneu-personal-account/blob/cc80553eb64d961fb35fc6c7ca8c5166a4f4ecb0/hneu-personal-account-webapp/src/main/java/edu/hneu/studentsportal/domain/Discipline.java#L72 
+
+Students profile is being created in `StudentService`: https://github.com/orozdolskyi/hneu-personal-account/blob/cc80553eb64d961fb35fc6c7ca8c5166a4f4ecb0/hneu-personal-account-webapp/src/main/java/edu/hneu/studentsportal/service/StudentService.java#L46 
+
+that defines the list of disciplines by: https://github.com/orozdolskyi/hneu-personal-account/blob/d78a55a0784356a7200d1b5607fac9dfcaa8d53b/hneu-personal-account-webapp/src/main/java/edu/hneu/studentsportal/service/StudentService.java#L48";"'admin'; 'profile creation'";https://github.com/orozdolskyi/hneu-personal-account/issues/2;0;Title: 'create...';The repo is not accessible anymore;;;404;;False;
+309527098.0;6;85057381;orozdolskyi/hneu-personal-account;resolve #5 Regular expression fix for Faculties and Disciplines;;;https://github.com/orozdolskyi/hneu-personal-account/issues/6;1;Title: 'regular expression fix...';The repo is not accessible anymore;;;404;;True;title/desc: fix
+313011151.0;7;85057381;orozdolskyi/hneu-personal-account;remove code field validation on all admin pages;;'admin';https://github.com/orozdolskyi/hneu-personal-account/issues/7;0;Title: 'remove...';The repo is not accessible anymore;;;404;;False;
+303192527.0;1;85057381;orozdolskyi/hneu-personal-account;Toggle discipline disabling;;;https://github.com/orozdolskyi/hneu-personal-account/issues/1;0;Title: 'toggle...';The repo is not accessible anymore;;;404;;False;
+326093221.0;17;85057381;orozdolskyi/hneu-personal-account;Change less pre-processor to use gradle plugin;;"'improvement'; 'infrastructure'";https://github.com/orozdolskyi/hneu-personal-account/issues/17;0;tag 'improvement';The repo is not accessible anymore;;;404;;False;
+306175861.0;3;85057381;orozdolskyi/hneu-personal-account;Create new student with test email under mocked-email-provider profile;"- create a new email in gmail 
+- add a new profile named `mocked-email-provider` that will replace email provider with a stub (provided in the argument?)";'testing';https://github.com/orozdolskyi/hneu-personal-account/issues/3;0;tag 'testing';The repo is not accessible anymore;;;404;;False;
+201000000.0;15;59791768;liatrio/libotrio;Adding a feature to save attachments to Confluence from slack;;;https://github.com/liatrio/libotrio/issues/15;0;Title: 'adding a feature...';;ok;;;0.0;False;
+220000000.0;25;59791768;liatrio/libotrio;Lib 18 reminder;Added a reminder feature to libotrio;;https://github.com/liatrio/libotrio/issues/25;0;Description: 'added... ';;ok;;;0.0;False;
+217000000.0;23;59791768;liatrio/libotrio;Updated Jenkins authentication logic;;;https://github.com/liatrio/libotrio/issues/23;0;Title: 'updated ....';;Olhando o c¢digo eu fiquei na d£vida de qual foi o motivo dessa atualiza?o (fix ou feature).;0.0;Não me pareceu ser erro e sim uma outra lógica de autenticação no Jenkins;0.0;False;
+244000000.0;26;59791768;liatrio/libotrio;Added simple storage backend;This got left out somehow during the root rebase.;;https://github.com/liatrio/libotrio/issues/26;1;Description. Looks like some code was not included when it should have been.;;Olhando o c¢digo parece fix mesmo.;;;1.0;False;
+200000000.0;13;59791768;liatrio/libotrio;Added environment toggles;Also implemented the help feature;;https://github.com/liatrio/libotrio/issues/13;0;Title: 'added...' description: '... implemented....';;ok;;;0.0;False;
+204000000.0;17;59791768;liatrio/libotrio;Youtube video search via googleapis;"Replies with top relevant result of a youtube video query.
+
+
+
+ex: `yt dockercon 2016`, `yt cute kittys`
+
+
+
+Requires environment variable GOOGLE_API_KEY (https://developers.google.com/youtube/v3/getting-started)";;https://github.com/liatrio/libotrio/issues/17;0;Changed files;Looks like feature implementation;ok;;;0.0;False;
+204000000.0;18;59791768;liatrio/libotrio;Lib 4 docker dev env;"This commit adds a Dockerfile and docker-compose.yml that can bring up containers running libotrio for development. 
+
+
+
+Also renamed a few environment variables to make them a little more understandable. These new variable names have been added to the Heroku staging/production environments.
+
+
+
+To run the docker dev containers:
+
+
+
+1. Add `SLACK_ACCESS_TOKEN` and envars for desired features (see docker-compose.yml) to your local environment
+
+2. run `docker-compose up` to start the bot
+
+3. run `docker-compose down -v` after the bot exits to clean up dangling volumes. 
+
+
+
+TODO: Add docker info to the Libotrio documentation (LIB-10)";;https://github.com/liatrio/libotrio/issues/18;0;Description: 'this commit adds...' also 'renamed a few [...] variables';;ok;;;0.0;False;
+198000000.0;12;59791768;liatrio/libotrio;Implemented feature toggles;Features can now be enables/disabled in feature-toggles.js.;;https://github.com/liatrio/libotrio/issues/12;0;Titlte: 'implemented...';;ok;;;0.0;False;
+245000000.0;28;59791768;liatrio/libotrio;root rebase;;;https://github.com/liatrio/libotrio/issues/28;0;Changed files;;N?o entendi esse. Parece que  um rebase. Mas ok. Claramente n?o  bug.;;;0.0;False;
+200000000.0;14;59791768;liatrio/libotrio;Implemented basic ticket detection;This doesnt check if the ticket actually exists first, need api access for that. But for now it should get the job done.;;https://github.com/liatrio/libotrio/issues/14;0;Title: 'implemented...';;ok;;;0.0;False;

@@ -1,0 +1,87 @@
+library(readxl)
+library(effsize)
+CRQ2 <- read_excel("Dataset/CRQ2_2.xlsx")
+View(CRQ2)
+par(mfrow=c(3,2), mar=c(3, 3, 1.8, 1.8), mgp = c(1, 0, 0), tck = -0.01, oma=c(0, 0, 1, 0), tcl = -0.01, lheight=2)
+par(cex.lab=1.5)
+par(cex.axis=1.3)
+
+
+summary(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`)
+
+summary(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`)
+
+shapiro.test(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`)
+
+
+shapiro.test(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`)
+
+
+with(CRQ2, tapply(AVERAGE_EFFORT_PER_MERGE_WO_FT, Linguagem, shapiro.test))
+with(CRQ2, tapply(AVERAGE_EFFORT_PER_MERGE_WITH_FT, Linguagem, shapiro.test))
+
+
+
+boxplot(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="c#"], CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="c#"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="C#", cex=1.5)
+
+test <- wilcox.test(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="c#"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="c#"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ2$Linguagem=="c#")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="c#"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="c#"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+
+boxplot(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="java"], CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="java"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="Java", cex=1.5)
+test <- wilcox.test(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="java"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="java"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ2$Linguagem=="java")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="java"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="java"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+
+boxplot(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Javascript"], CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Javascript"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="Javascript", cex=1.5)
+test <- wilcox.test(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Javascript"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Javascript"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ2$Linguagem=="Javascript")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Javascript"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Javascript"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+boxplot(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="PHP"], CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="PHP"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="PHP", cex=1.5)
+test <- wilcox.test(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="PHP"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="PHP"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ2$Linguagem=="PHP")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="PHP"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="PHP"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+boxplot(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Python"], CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Python"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="Python", cex=1.5)
+test <- wilcox.test(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Python"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Python"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ2$Linguagem=="Python")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Python"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Python"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+
+boxplot(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Ruby"], CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Ruby"],names=c("Before FT","After FT"), horizontal=FALSE, outline=FALSE, ylab="Avg. effort / merge", xlab="Ruby", cex=1.5)
+test <- wilcox.test(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Ruby"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Ruby"], paired = TRUE)
+pvalue <- test$p.value
+pvalueformatted <- format(pvalue, digits=3, nsmall=2)
+mtext(paste("p-value = ", pvalueformatted), side=3, line=0.5, at=0.9, cex = 1)
+linha <- sum(CRQ2$Linguagem=="Ruby")
+mtext(paste("Projects = ", linha ), side=3, line=0.5, at=1.5, cex = 1)
+effect <- cliff.delta(CRQ2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2$Linguagem=="Ruby"],CRQ2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2$Linguagem=="Ruby"],return.dm = FALSE)
+mtext(paste("Cliff's Delta = ", effect$magnitude ), side=3, line=0.5, at=2.2, cex = 1)
+

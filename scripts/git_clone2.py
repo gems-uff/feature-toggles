@@ -1,11 +1,12 @@
 from git import Repo
 import mysql.connector
 import os
+import configs as cf
 
 print("conectado ao banco")
-cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
-                              host='50.62.209.195',
-                              database='edusmil_bdd',connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.bd_user, user=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 print("banco de dados conectado")
 
@@ -24,9 +25,9 @@ for row in cursor._rows:
         if not os.path.exists(directory):
             os.makedirs(directory)
         Repo.clone_from(git_url, directory)
-        cnx = mysql.connector.connect(user='bdd', password='bdduff!!',
-                              host='50.62.209.195',
-                              database='edusmil_bdd',connection_timeout=300,buffered=True)
+        cnx = mysql.connector.connect(user=cf.bd_user, user=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
         cursor = cnx.cursor()
         update_clone="update git_table set dt_clone=now() where id="+str(row[2].decode("utf-8"))+";"
         cursor.execute(update_clone)

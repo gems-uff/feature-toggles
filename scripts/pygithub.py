@@ -7,23 +7,11 @@ import mysql.connector
 from json2html import json2html
 from datetime import datetime
 from requests.auth import HTTPBasicAuth
+import configs as cf
 
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
-
-
-
-cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= "SELECT git_language, git_word, id_gitsearch FROM git_search where git_status='P';"
@@ -49,16 +37,16 @@ for row in cursor._rows:
 
     cnx.close()
 
-    g = Github("edusmil", "Smil123!")
+    g = Github(cf.gh_user, cf.gh_pass)
     g.per_page=100
     page=-1
     for i in range(page, 9):
         page = page + 1
         print("pagina="+str(page))
         
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE)
+        cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name)
         cursor = cnx.cursor(buffered=True)
         
         print("pesquisando:" + row[1].decode("utf-8"))

@@ -4,27 +4,13 @@ import  requests
 import time
 import datetime
 import sys
+import configs as cf
 
-class CONST(object):
-    BD_USER = "bdd_dissertacao"
-    BD_PASSWORD = "Smil123!"
-    BD_HOST = "50.62.209.195"
-    BD_DATABASE = "uff_bdd_dissertacao"
-    REPO_DIR="//home//eduardosmil//featuretoggles//git_repositories//"
-    username = 'edsumil'
+login = requests.get('https://api.github.com/search/repositories?q=github+api', auth=(cf.gh_user,cf.gh_token.replace("$","")))
 
-    token="ed5bb3cc975f60c38$948e632284654a769bcf81e"
-
-    def __setattr__(self, *_):
-        pass
-
-CONST = CONST()
-
-login = requests.get('https://api.github.com/search/repositories?q=github+api', auth=(CONST.username,CONST.token.replace("$","")))
-
-cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
 cursor = cnx.cursor()
 
 select_search= "SELECT t.id, t.name, t.language, t.full_name FROM git_table t " 
@@ -40,7 +26,7 @@ for row in cursor._rows:
     
     sql_update_git_table = "update git_table set dt_issues=now() where id=" + str(row[0].decode("utf-8")) + ";"
     for i in range(1,200):
-        headers = {'Accept': 'application/vnd.github.cloak-preview', 'Authorization': 'token ' + CONST.token.replace("$","")}
+        headers = {'Accept': 'application/vnd.github.cloak-preview', 'Authorization': 'token ' + cf.gh_token.replace("$","")}
         url = "https://api.github.com/repos/"+row[3].decode("utf-8")+"/issues?state=all&per_page=100&page=" + str(i)
         data = requests.get(url,headers=headers).json()
         
@@ -55,9 +41,9 @@ for row in cursor._rows:
             _id = _issues.get("id")
 
             sql_verify = "select 1 from git_issues where id=" + str(_id) + ";"
-            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                                host=CONST.BD_HOST,
-                                database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+            cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                                host=cf.db_host,
+                                database=cf.db_name,connection_timeout=300,buffered=True)
             cursor_v = cnx.cursor()
             
             cursor_v.execute(sql_verify)
@@ -117,9 +103,9 @@ for row in cursor._rows:
     if sql_insert != "":
         sql_insert = sql_insert[:len(sql_insert)-1]
 
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
         cursor = cnx.cursor()
         sql_insert= ("insert into git_issues (id, id_repo, git_issue_number, git_issue_title, git_issue_body, git_issue_status, " +
                         "                       git_issues_close_date, git_issues_create_date,git_issues_update_date,git_issues_milestone_state, " +
@@ -130,9 +116,9 @@ for row in cursor._rows:
         if sql_insert_label != "":
             sql_insert_label = sql_insert_label[:len(sql_insert_label)-1]
 
-            cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+            cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
             cursor = cnx.cursor()
             
             sql_insert_label= ("insert into git_issues_label (id,id_issue,id_repo, git_issues_label_name,git_issues_label_description) values  " +
@@ -140,16 +126,16 @@ for row in cursor._rows:
             cursor.execute(sql_insert_label)
             cnx.close()
 
-    cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+    cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
     cursor = cnx.cursor()    
     cursor.execute(sql_update_git_table)
     cnx.close()
 
-    cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+    cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
     cursor_issues = cnx.cursor()
     select_search= ("SELECT id, id_repo, git_issue_number FROM git_issues i " +
                     "where not exists (select 1 from git_issues_events e where i.id = e.id_issue) and i.id_repo="+row[0].decode("utf-8")+"; " )
@@ -161,7 +147,7 @@ for row in cursor._rows:
 
     for row_issue in cursor_issues._rows:
         for i in range(1,300):
-            headers = {'Accept': 'application/vnd.github.cloak-preview', 'Authorization': 'token ' + CONST.token.replace("$","")}
+            headers = {'Accept': 'application/vnd.github.cloak-preview', 'Authorization': 'token ' + cf.gh_token.replace("$","")}
             url = "https://api.github.com/repos/"+row[3].decode("utf-8")+"/issues/"+row_issue[2].decode("utf-8")+"/events?per_page=100&page=" + str(i)
             data_events = requests.get(url,headers=headers).json()
 
@@ -186,9 +172,9 @@ for row in cursor._rows:
     if sql_insert_event != "":
         sql_insert_event = sql_insert_event[:len(sql_insert_event)-1]
 
-        cnx = mysql.connector.connect(user=CONST.BD_USER, password=CONST.BD_PASSWORD,
-                              host=CONST.BD_HOST,
-                              database=CONST.BD_DATABASE,connection_timeout=300,buffered=True)
+        cnx = mysql.connector.connect(user=cf.db_user, password=cf.db_pass,
+                              host=cf.db_host,
+                              database=cf.db_name,connection_timeout=300,buffered=True)
         cursor = cnx.cursor()
             
         sql_insert_event= ("insert into git_issues_events (id,id_issue,cd_event,id_commit,git_create_date) values  " +
