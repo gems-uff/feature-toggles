@@ -2,3 +2,5 @@
 .Rproj.user
 scripts/configs.py
 repos/
+*/__pycache__/**
+.ipynb_checkpoints
