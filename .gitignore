@@ -1,6 +1,7 @@
 .remote
 .Rproj.user
-/scripts/configs.py
+*/.vscode
+scripts/configs.py
 repos/
 */__pycache__/**
 .ipynb_checkpoints
