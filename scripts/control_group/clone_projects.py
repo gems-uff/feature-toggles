@@ -3,6 +3,7 @@ import os
 import time
 import subprocess
 import platform
+import pandas as pd
 
 #TODO: add a timeout. when input is requested, timeout if no input is given.
 def clone_project(project_fullname):
@@ -31,4 +32,15 @@ def execute_command(command, path):
     except subprocess.CalledProcessError as e:
         print("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output), flush=True)
     return executed
+
+def main():
+    projects = pd.read_csv('../../data/control_projects.csv')
     
+    print(f'{time.ctime()} ### Starting the clone process...')
+    for index, row in projects.iterrows():
+        project = row['project']
+        print(f'Cloning project {index+1} of {len(projects)} - {project}')
+        clone_project(project)
+        
+if __name__ == '__main__':
+    main()
