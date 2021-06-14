@@ -36,10 +36,10 @@ def execute_command(command, path):
 def main():
     projects = pd.read_csv('../../data/control_projects.csv')
     
-    print(f'{time.ctime()} ### Starting the clone process...')
+    print(f'{time.ctime()} ### Starting the clone process...', flush=True)
     for index, row in projects.iterrows():
         project = row['project']
-        print(f'Cloning project {index+1} of {len(projects)} - {project}')
+        print(f'Cloning project {index+1} of {len(projects)} - {project}', flush=True)
         clone_project(project)
         
 if __name__ == '__main__':
