@@ -58,7 +58,7 @@ def getTotalLines(_json):
         return sys.exc_info()[0]
 
 
-projects = pd.read_csv('../../data/control_projects_test.csv')
+projects = pd.read_csv('../../data/control_projects.csv')
 
 '''
 python collect_loc.py 3 1
