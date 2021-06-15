@@ -28,7 +28,7 @@ separator: space
 '''
 def getLoc(hash_parent, project_path):
     try:
-        command = f"cloc --json --sum-one {hash_parent[0:6]}"
+        command = f"cloc --json --sum-one {hash_parent[0:10]}"
         return execute_command(command, project_path)
     except:
         return ""
