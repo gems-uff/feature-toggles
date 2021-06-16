@@ -1,4 +1,4 @@
 title: Feature Toggles Study
 theme: jekyll-theme-cayman
-exclude: 
-  - scripts/extensions
+exclude:
+  - scripts/extensions/
