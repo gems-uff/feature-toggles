@@ -124,7 +124,7 @@ def try_strptime(s, fmts=["%Y-%m-%dT%H:%M:%S.%f","%Y-%m-%d %H:%M:%S %z"]):
             continue
     return None
 
-projects = pd.read_csv('../../data/control_projects_test.csv')
+projects = pd.read_csv('../../data/control_projects.csv')
 issues = []
 for index, row in projects.iterrows():
     print(f"Project {index+1} of {len(projects)} - {row['project']}")
