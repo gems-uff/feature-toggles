@@ -50,6 +50,6 @@ for index, row in projects.iterrows():
     else:
         print('Empty commits list!')
 
-df = pd.DataFrame(results, columns=['project', 'middle_commit', 'middle_commit_date', 'middle_index', 'total_commits', 'QT_COMMIT_BFR', 'QT_COMMIT_AFT'])
+df = pd.DataFrame(results, columns=['project', 'middle_commit', 'middle_commit_date', 'middle_index', 'total_commits', 'QT_COMMIT_BEFORE', 'QT_COMMIT_AFTER'])
 df.to_csv('../../data/projects_control_points.csv', index=False)
 
