@@ -21,7 +21,10 @@ def get_commits(project_path):
 
 def get_commit_date(commit_sha, project_path):
     command = f'git show -s --format=%ci {commit_sha}'
-    return execute_command(command, project_path)
+    date = execute_command(command, project_path)
+    if len(date.split('\n')) > 1:
+        return date.split('\n')[0]
+    return date
 
 '''
 separator: space
