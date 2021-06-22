@@ -1,15 +1,27 @@
 library(readxl)
+library(beeswarm)
 CRQ23 <- read_excel("Dataset/CRQ2_3.xlsx")
 View(CRQ23)
-layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
-par(cex.axis=2)
-boxplot(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT, CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT, names = c("After FT","Before FT"), horizontal = TRUE, ylim=c(0,65),boxwex=.8, cex=1.5)
-par(cex.lab=2)
+
+#layout(matrix(c(1,2,3),nr=1,nc=3),widths=c(7,1,4))
+#layout.show(3)
+#par(cex.axis=2)
+par(mfrow=c(1,2), mai=c(0,1,0,0))
+boxplot(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT, CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT, names = c("After FT","Before FT"), horizontal = TRUE, ylim=c(0,70),boxwex=.8, cex=1.5)
+#par(cex.lab=2)
 title(xlab="Merge Effort / 100 Commits")
-text(boxplot.stats(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT)$stats, labels = format(round(boxplot.stats(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT)$stats,2),nsmall = 2), y = 0.5, cex=2)
-text(boxplot.stats(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT)$stats, labels = format(round(boxplot.stats(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT)$stats,2),nsmall = 2), y = 1.5, cex=2)
-x <- list(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT[CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT>=100],CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT[CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT>=100])
-stripchart(x,pch=1,cex=1.5,xlim=c(100,300),  method="stack")
+
+#c(-1,-1,0.4,9.03,22.15)
+text(boxplot.stats(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT)$stats, labels = format(round(boxplot.stats(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT)$stats,2),nsmall = 2), y = 0.5)
+text(boxplot.stats(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT)$stats, labels = format(round(boxplot.stats(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT)$stats,2),nsmall = 2), y = 1.5)
+x <- list(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT[CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WITH_FT>=70],CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT[CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT>=70])
+#x
+#stripchart(x,pch=1,cex=1.5,xlim=c(100,300), method="stack", vertical=FALSE, labels = '')
+#beeswarm(0, pch = 1, xvertical=FALSE, method='center', labels='')
+#par(mai = c(1, 0, 0, 0))
+beeswarm(x, pch = 1, xlim=c(100,280), vertical=FALSE, method='center', labels='')
+title(xlab="Outliers for Merge Effort / 100 Commits")
+
 
 shapiro.test(CRQ23$AVERAGE_MERGE_EFFORT_IN_100_COMMITS_WO_FT)
 

@@ -1,24 +1,35 @@
 library(readxl)
 CRQ2_2 <- read_excel("Dataset/CRQ2_2.xlsx")
 View(CRQ2_2)
-layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
-par(cex.axis=2)
-boxplot(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`, CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`, names = c("After FT","Before FT"), horizontal = TRUE, ylim=c(0,7), cex=1.5)
-par(cex.lab=2)
+#layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,1))
+par(cex.axis=1.5)
+summary(CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`)
+summary(CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`)
+
+boxplot.stats(CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`)$out
+boxplot(CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`, CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`, names = c("After FT","Before FT"), horizontal = TRUE, ylim=c(0,15), cex=1.5)
+#par(cex.lab=2)
 title(xlab="Average Merge Effort")
-text(boxplot.stats(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`)$stats, labels = format(round(boxplot.stats(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`)$stats,2),nsmall = 0), y = 0.5, cex=2)
-text(boxplot.stats(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`)$stats, labels = format(round(boxplot.stats(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`)$stats,2),nsmall = 0), y = 1.5, cex=2)
-x <- list(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`[CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`>=10],CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`[CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`>=10])
-stripchart(x,pch=1,cex=1.5,xlim=c(10,40),  method="stack")
+boxplot.stats(CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`)$stats
+boxplot.stats(CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`)$stats
+text(c(-1, -1, 0.04, 1.44, 3.45), labels = format(round(boxplot.stats(CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`)$stats,2),nsmall = 0), y = 0.5, cex=1)
+text(c(-1, 0.0037, 0.56, 1.64, 3.77), labels = format(round(boxplot.stats(CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`)$stats,2),nsmall = 0), y = 1.5, cex=1)
+#x <- list(CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`[CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`>=4.3],CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`[CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`>=4.3])
+#x
+#stripchart(x,pch=1,xlim=c(4.3,1500),  method="stack", offset = 0)
 
-shapiro.test(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`)
+summary(CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`)
+shapiro.test(CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`)
 
-shapiro.test(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`)
 
-wilcox.test(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`,CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`, paired = TRUE)
+summary(CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`)
+shapiro.test(CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`)
+
+
+wilcox.test(CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`,CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`, paired = TRUE)
 
 library("effsize")
 
 
-cliff.delta(CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WO_FT`,CRQ2_2$`AVERAGE_EFFORT_PER_MERGE_WITH_FT`,return.dm = FALSE)
+cliff.delta(CRQ2_2$`AVG_MERGE_EFFORT_WO_FT`,CRQ2_2$`AVG_MERGE_EFFORT_WITH_FT`,return.dm = FALSE)
 
