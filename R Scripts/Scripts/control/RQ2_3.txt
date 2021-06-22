@@ -1,0 +1,36 @@
+library(readxl)
+CRQ23 <- read.csv("Dataset/control/control_projects_extracted_metrics.csv")
+View(CRQ23)
+#layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
+
+summary(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE)
+
+summary(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER)
+
+par(cex.axis=1.5)
+boxplot(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER, CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE, names = c("After","Before"), horizontal = TRUE, ylim=c(0,4),boxwex=.8, cex=1.5)
+par(cex.lab=1.5)
+title(xlab="Merge Effort / 100 Commits")
+boxplot.stats(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER)$stats
+boxplot.stats(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE)$stats
+text(c(-2, -0.5, 0.01, 0.6, 1.37), labels = format(round(boxplot.stats(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER)$stats,2),nsmall = 2), y = 0.5, cex=1)
+text(c(-2, -2, 0.0008,0.39, 0.83), labels = format(round(boxplot.stats(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE)$stats,2),nsmall = 2), y = 1.5, cex=1)
+#x <- list(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER[CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER>=100],CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE[CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE>=100])
+#stripchart(x,pch=1,cex=1.5,xlim=c(100,300),  method="stack")
+
+
+summary(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE)
+shapiro.test(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE)
+
+
+summary(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER)
+shapiro.test(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER)
+
+
+wilcox.test(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE,CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER, paired = TRUE)
+
+
+library("effsize")
+
+cliff.delta(CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_BEFORE,CRQ23$TOTAL_AVG_MERGE_EFFORT_IN_100_COMMITS_AFTER,return.dm = FALSE)
+

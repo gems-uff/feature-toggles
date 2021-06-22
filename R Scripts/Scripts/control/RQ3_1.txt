@@ -1,0 +1,29 @@
+library(readxl)
+CRQ3 <- read.csv("Dataset/control/control_projects_extracted_metrics.csv")
+#View(CRQ3)
+#layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
+par(cex.axis=1.5)
+boxplot(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`,CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`, names = c("After","Before"), horizontal = TRUE, ylim=c(0,30),boxwex=.8, cex=1.5)
+par(cex.lab=1.5)
+title(xlab="# Defects / KLOC x 100 commits")
+boxplot.stats(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`)$stats
+boxplot.stats(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`)$stats
+text(c(-2, 0.32, 1.64, 6.61, 15.78), labels = format(round(boxplot.stats(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`)$stats,2),nsmall = 2), y = 0.5, cex=1)
+text(c(-2, -0.1, 1.05, 4.02, 9.56), labels = format(round(boxplot.stats(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`)$stats,2),nsmall = 2), y = 1.5, cex=1)
+#x <- list(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`[CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`>=2],CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`[CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`>=2])
+#stripchart(x,pch=1,cex=1.5,xlim=c(2,15))
+
+summary(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`)
+shapiro.test(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`)
+
+
+summary(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`)
+shapiro.test(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`)
+
+
+wilcox.test(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`,CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`,paired = TRUE)
+
+
+cliff.delta(CRQ3$`ISSUES_KLOC_IN_100_COMMITS_BEFORE`,CRQ3$`ISSUES_KLOC_IN_100_COMMITS_AFTER`)
+
+
