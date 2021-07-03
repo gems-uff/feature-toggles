@@ -1,0 +1,5 @@
+library(readxl)
+projects <- read.csv("Dataset/control/control_projects.csv")
+View(projects)
+by(projects$commits, projects$primaryLanguage, summary)
+by(projects$commits, projects$primaryLanguage, sd)
