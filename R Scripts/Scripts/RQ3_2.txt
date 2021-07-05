@@ -2,9 +2,9 @@ library(readxl)
 CRQ3_2 <- read_excel("Dataset/CRQ3_2.xlsx")
 #View(CRQ3_2)
 #layout(matrix(1:2,nr=1,nc=4),heights=c(1,1,1,1),widths=c(8,0,1,2))
-par(cex.axis=2)
-boxplot(CRQ3_2$AVG_TIME_PER_ISSUES_WITH_FT, CRQ3_2$AVG_TIME_PER_ISSUES_WO_FT, names = c("After FT","Before FT"), horizontal = TRUE, ylim=c(0,25),boxwex=.8, cex=2)
-par(cex.lab=2)
+par(cex.axis=1.5)
+boxplot(CRQ3_2$AVG_TIME_PER_ISSUES_WITH_FT, CRQ3_2$AVG_TIME_PER_ISSUES_WO_FT, names = c("After FT","Before FT"), horizontal = TRUE, ylim=c(0,25),boxwex=.8, cex=1.5)
+par(cex.lab=1.5)
 title(xlab="# Days needed / Defect")
 boxplot.stats(CRQ3_2$AVG_TIME_PER_ISSUES_WITH_FT)$stats
 boxplot.stats(CRQ3_2$AVG_TIME_PER_ISSUES_WO_FT)$stats
