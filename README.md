@@ -17,35 +17,21 @@ We list in the following the datasets used to answer each one of the research qu
 
 - [RQ1: Characterization (n=949)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/C_cleaned.xlsx)
 - [RQ2.1: Normalized number of merges (n=158)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_1.xlsx)
-- [RQ2.2: Effort per merge (n=133)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_2.xlsx)
+- [RQ2.2: Effort per merge (n=158)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_2.xlsx)
 - [RQ2.3: Normalized merge effort (n=158)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_3.xlsx)
 - [RQ3.1: Normalized number of defects (n=79)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_1.xlsx)
-- [RQ3.2: Time to fix a defect (n=50)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_2.xlsx)
+- [RQ3.2: Time to fix a defect (n=79)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_2.xlsx)
 - [RQ3.3: Normalized time fixing defects (n=79)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_3.xlsx)
 
-We also replicated our experiment over a more selective and uniform corpus (n=43), to better allow triangularization of the results:
-
-- [RQ2.1: Normalized number of merges (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_1_UNIQUE.xlsx)
-- [RQ2.2: Effort per merge (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_2_UNIQUE.xlsx)
-- [RQ2.3: Normalized merge effort (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ2_3_UNIQUE.xlsx)
-- [RQ3.1: Normalized number of defects (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_1_UNIQUE.xlsx)
-- [RQ3.2: Time to fix a defect (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_2_UNIQUE.xlsx)
-- [RQ3.3: Normalized time fixing defects (n=43)](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CRQ3_3_UNIQUE.xlsx)
 
 Detailed Reproducibility Instructions
 =====================================
 
-Base corpus for each research question:
-
-- RQ1: [C<sub>Cleaned</sub>](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/C_cleaned.xlsx) contains the result of the queries, on Github, for projects that adopted feature toggles.
-- RQ2: [C<sub>Merge</sub>](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CMERGE.xlsx) contains the projects with at least one merge commit.
-- RQ3: [C<sub>Defects</sub>](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Dataset/CBUG.xlsx): contains the projects with at least one issue or pull request representing a defect.
-		
 Corpus Filtering:
 
 - RQ1: No further actions are needed.
-- RQ2: To calculate de the threshold, we ran the [filter_RQ2.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/filter_RQ2.txt) R script. Based on the results, we applied a filter requiring 82 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw), over the corpus of RQ1 and produced the corpus for RQ2.
-- RQ3: To calculate de the threshold, we ran the [filter_RQ3.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/filter_RQ3.txt) R script. Based on the results, we applied a filter requiring 132 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw), over the corpus of RQ1 and produced the corpus for RQ3.
+- RQ2: To calculate the threshold, we ran the [filter_RQ2.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/filter_RQ2.txt) R script. Based on the results, we applied a filter requiring 82 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw), over the corpus of RQ1 and produced the corpus for RQ2.
+- RQ3: To calculate the threshold, we ran the [filter_RQ3.txt](https://github.com/gems-uff/feature-toggles/raw/master/R%20Scripts/Scripts/filter_RQ3.txt) R script. Based on the results, we applied a filter requiring 132 commits, before and after feature toggles (qtde_commit_s_fw and qtde_commit_c_fw), over the corpus of RQ1 and produced the corpus for RQ3.
 
 Research Questions' Analyses:
 
