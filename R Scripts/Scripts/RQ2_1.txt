@@ -5,8 +5,8 @@ par(cex.axis=1.5)
 boxplot(CRQ2$`NUM_MERGES_PER_100_COMMITS_WITH_FT`,CRQ2$`NUM_MERGES_PER_100_COMMITS_WO_FT`, names = c("After FT","Before FT"), horizontal = TRUE, boxwex = 0.75)
 par(cex.lab=1.5)
 title(xlab="Merge / 100 Commits")
-text(boxplot.stats(CRQ2$`NUM_MERGES_PER_100_COMMITS_WITH_FT`)$stats, labels = format(round(boxplot.stats(CRQ2$`NUM_MERGES_PER_100_COMMITS_WITH_FT`)$stats,0),nsmall = 0), y = 0.5, cex=1.5)
-text(boxplot.stats(CRQ2$`NUM_MERGES_PER_100_COMMITS_WO_FT`)$stats, labels = format(round(boxplot.stats(CRQ2$`NUM_MERGES_PER_100_COMMITS_WO_FT`)$stats,0),nsmall = 0), y = 1.5, cex=1.5)
+text(boxplot.stats(CRQ2$`NUM_MERGES_PER_100_COMMITS_WITH_FT`)$stats, labels = format(round(boxplot.stats(CRQ2$`NUM_MERGES_PER_100_COMMITS_WITH_FT`)$stats,1),nsmall = 1), y = 0.5, cex=1.5)
+text(boxplot.stats(CRQ2$`NUM_MERGES_PER_100_COMMITS_WO_FT`)$stats, labels = format(round(boxplot.stats(CRQ2$`NUM_MERGES_PER_100_COMMITS_WO_FT`)$stats,1),nsmall = 1), y = 1.5, cex=1.5)
 
 summary(CRQ2$`NUM_MERGES_PER_100_COMMITS_WO_FT`)
 
